@@ -1,10 +1,10 @@
 @import 'tailwindcss';
-@import "tw-animate-css";
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-montserrat: 'Montserrat', sans-serif;
+  --font-noto: 'Noto Sans', sans-serif;
 }
 
 body {

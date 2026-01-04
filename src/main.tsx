@@ -6,7 +6,7 @@ import App from '@/App.tsx';
 
 WebFont.load({
   google: {
-    families: ['Montserrat'],
+    families: ['Noto Sans'],
   },
 });
 

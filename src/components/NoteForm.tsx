@@ -21,21 +21,7 @@ import { z } from 'zod';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormDataSchema, type Tag } from '@/types/note';
-
-const tags: Tag[] = [
-  {
-    label: 'First',
-    value: 'tag-first',
-  },
-  {
-    label: 'Second',
-    value: 'tag-second',
-  },
-  {
-    label: 'Third',
-    value: 'tag-third',
-  },
-];
+import { tags } from '@/db/tags';
 
 const NoteForm = () => {
   const form = useForm<z.infer<typeof FormDataSchema>>({

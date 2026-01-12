@@ -10,7 +10,6 @@ import {
   MultiSelectValue,
 } from '@/components/ui/multi-select';
 import { Textarea } from '@/components/ui/textarea';
-import { useRef, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { z } from 'zod';
 
@@ -44,24 +43,14 @@ const tags: Tag[] = [
 ];
 
 const NoteForm = () => {
-  const titleRef = useRef<HTMLInputElement>(null);
-  const markdownRef = useRef<HTMLTextAreaElement>(null);
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    console.log(titleRef.current?.value);
-    console.log(markdownRef.current?.value);
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
+    <form>
       <FieldSet>
         <FieldGroup>
           <div className='grid grid-cols-2 gap-4'>
             <Field>
               <FieldLabel className='text-xl'>Title</FieldLabel>
-              <Input ref={titleRef} />
+              <Input />
             </Field>
             <Field>
               <FieldLabel className='text-xl'>Tags</FieldLabel>
@@ -86,7 +75,6 @@ const NoteForm = () => {
             <Textarea
               className='resize-none'
               rows={18}
-              ref={markdownRef}
             />
           </Field>
           <Field

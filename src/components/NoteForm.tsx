@@ -20,20 +20,7 @@ import { Link } from 'react-router-dom';
 import { z } from 'zod';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
-const TagSchema = z.object({
-  label: z.string(),
-  value: z.string(),
-});
-
-const FormDataSchema = z.object({
-  title: z.string().min(3, 'Minimum 3 characters required'),
-  body: z.string().min(50, 'Minimum 50 characters required'),
-  tags: z.array(z.string()),
-});
-
-type Tag = z.infer<typeof TagSchema>;
-type FormData = z.infer<typeof FormDataSchema>;
+import { FormDataSchema, type Tag } from '@/types/note';
 
 const tags: Tag[] = [
   {
@@ -102,7 +89,7 @@ const NoteForm = () => {
                     </MultiSelectTrigger>
                     <MultiSelectContent search={false}>
                       <MultiSelectGroup>
-                        {tags.map((tag) => (
+                        {tags.map((tag: Tag) => (
                           <MultiSelectItem value={tag.value}>
                             {tag.label}
                           </MultiSelectItem>

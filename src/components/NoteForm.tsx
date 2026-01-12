@@ -12,11 +12,21 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { useRef, type FormEvent } from 'react';
 import { Link } from 'react-router-dom';
+import { z } from 'zod';
 
-type Tag = {
-  label: string;
-  value: string;
-};
+const TagSchema = z.object({
+  label: z.string(),
+  value: z.string(),
+});
+
+const FormDataSchema = z.object({
+  title: z.string().min(3),
+  body: z.string().min(50),
+  tag: TagSchema,
+});
+
+type Tag = z.infer<typeof TagSchema>;
+type FormData = z.infer<typeof FormDataSchema>;
 
 const tags: Tag[] = [
   {

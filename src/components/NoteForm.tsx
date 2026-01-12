@@ -1,5 +1,11 @@
 import { Button } from '@/components/ui/button';
-import { Field, FieldGroup, FieldLabel, FieldSet } from '@/components/ui/field';
+import {
+  Field,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldSet,
+} from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
 import {
   MultiSelect,
@@ -12,6 +18,8 @@ import {
 import { Textarea } from '@/components/ui/textarea';
 import { Link } from 'react-router-dom';
 import { z } from 'zod';
+import { useForm, Controller } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
 
 const TagSchema = z.object({
   label: z.string(),
@@ -19,9 +27,9 @@ const TagSchema = z.object({
 });
 
 const FormDataSchema = z.object({
-  title: z.string().min(3),
-  body: z.string().min(50),
-  tag: TagSchema,
+  title: z.string().min(3, 'Minimum 3 characters required'),
+  body: z.string().min(50, 'Minimum 50 characters required'),
+  tags: z.array(z.string()),
 });
 
 type Tag = z.infer<typeof TagSchema>;
@@ -30,53 +38,102 @@ type FormData = z.infer<typeof FormDataSchema>;
 const tags: Tag[] = [
   {
     label: 'First',
-    value: '1',
+    value: 'tag-first',
   },
   {
     label: 'Second',
-    value: '2',
+    value: 'tag-second',
   },
   {
     label: 'Third',
-    value: '3',
+    value: 'tag-third',
   },
 ];
 
 const NoteForm = () => {
+  const form = useForm<z.infer<typeof FormDataSchema>>({
+    resolver: zodResolver(FormDataSchema),
+    defaultValues: {
+      title: '',
+      body: '',
+      tags: [],
+    },
+  });
+
+  const onSubmit = (data: z.infer<typeof FormDataSchema>) => {
+    console.log(data);
+    form.reset();
+  };
+
   return (
-    <form>
+    <form onSubmit={form.handleSubmit(onSubmit)}>
       <FieldSet>
         <FieldGroup>
           <div className='grid grid-cols-2 gap-4'>
-            <Field>
-              <FieldLabel className='text-xl'>Title</FieldLabel>
-              <Input />
-            </Field>
-            <Field>
-              <FieldLabel className='text-xl'>Tags</FieldLabel>
-              <MultiSelect>
-                <MultiSelectTrigger>
-                  <MultiSelectValue placeholder='Select tags...' />
-                </MultiSelectTrigger>
-                <MultiSelectContent search={false}>
-                  <MultiSelectGroup>
-                    {tags.map((tag) => (
-                      <MultiSelectItem value={tag.value}>
-                        {tag.label}
-                      </MultiSelectItem>
-                    ))}
-                  </MultiSelectGroup>
-                </MultiSelectContent>
-              </MultiSelect>
-            </Field>
-          </div>
-          <Field>
-            <FieldLabel className='text-xl'>Body</FieldLabel>
-            <Textarea
-              className='resize-none'
-              rows={18}
+            <Controller
+              name='title'
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel className='text-xl'>Title</FieldLabel>
+                  <Input
+                    {...field}
+                    aria-invalid={fieldState.invalid}
+                    placeholder='Note Title'
+                    autoComplete='off'
+                  />
+                  {fieldState.invalid && (
+                    <FieldError errors={[fieldState.error]} />
+                  )}
+                </Field>
+              )}
             />
-          </Field>
+            <Controller
+              name='tags'
+              control={form.control}
+              render={({ field, fieldState }) => (
+                <Field data-invalid={fieldState.invalid}>
+                  <FieldLabel className='text-xl'>Tags</FieldLabel>
+                  <MultiSelect
+                    onValuesChange={field.onChange}
+                    values={field.value}>
+                    <MultiSelectTrigger>
+                      <MultiSelectValue placeholder='Select tags...' />
+                    </MultiSelectTrigger>
+                    <MultiSelectContent search={false}>
+                      <MultiSelectGroup>
+                        {tags.map((tag) => (
+                          <MultiSelectItem value={tag.value}>
+                            {tag.label}
+                          </MultiSelectItem>
+                        ))}
+                      </MultiSelectGroup>
+                    </MultiSelectContent>
+                  </MultiSelect>
+                </Field>
+              )}
+            />
+          </div>
+          <Controller
+            name='body'
+            control={form.control}
+            render={({ field, fieldState }) => (
+              <Field data-invalid={fieldState.invalid}>
+                <FieldLabel className='text-xl'>Body</FieldLabel>
+                <Textarea
+                  {...field}
+                  aria-invalid={fieldState.invalid}
+                  placeholder='Note Body'
+                  autoComplete='off'
+                  className='resize-none'
+                  rows={18}
+                />
+                {fieldState.invalid && (
+                  <FieldError errors={[fieldState.error]} />
+                )}
+              </Field>
+            )}
+          />
           <Field
             orientation='horizontal'
             className='justify-end'>

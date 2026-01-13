@@ -13,3 +13,15 @@ export const FormDataSchema = z.object({
 
 export type Tag = z.infer<typeof TagSchema>;
 export type FormData = z.infer<typeof FormDataSchema>;
+
+export type Note = {
+  id: string;
+} & FormData;
+
+export type RawNoteData = Pick<FormData, 'title' | 'body'> & {
+  tagIds: string[];
+};
+
+export type RawNote = {
+  id: string;
+} & RawNoteData;

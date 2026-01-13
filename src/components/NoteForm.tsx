@@ -20,20 +20,20 @@ import { Link } from 'react-router-dom';
 import { z } from 'zod';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { FormDataSchema, type Tag } from '@/types/note';
+import { NoteDataSchema, type TagData } from '@/types/note';
 import { tags } from '@/db/tags';
 
 const NoteForm = () => {
-  const form = useForm<z.infer<typeof FormDataSchema>>({
-    resolver: zodResolver(FormDataSchema),
+  const form = useForm<z.infer<typeof NoteDataSchema>>({
+    resolver: zodResolver(NoteDataSchema),
     defaultValues: {
       title: '',
       body: '',
-      tags: [],
+      tagIds: [],
     },
   });
 
-  const onSubmit = (data: z.infer<typeof FormDataSchema>) => {
+  const onSubmit = (data: z.infer<typeof NoteDataSchema>) => {
     console.log(data);
     form.reset();
   };
@@ -62,7 +62,7 @@ const NoteForm = () => {
               )}
             />
             <Controller
-              name='tags'
+              name='tagIds'
               control={form.control}
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
@@ -75,7 +75,7 @@ const NoteForm = () => {
                     </MultiSelectTrigger>
                     <MultiSelectContent search={false}>
                       <MultiSelectGroup>
-                        {tags.map((tag: Tag) => (
+                        {tags.map((tag: TagData) => (
                           <MultiSelectItem value={tag.value}>
                             {tag.label}
                           </MultiSelectItem>

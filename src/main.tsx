@@ -4,6 +4,7 @@ import WebFont from 'webfontloader';
 import '@/assets/global.css';
 import NotesProvider from '@/context/NotesProvider';
 import App from '@/App.tsx';
+import TagsProvider from '@/context/TagsProvider';
 
 WebFont.load({
   google: {
@@ -14,7 +15,9 @@ WebFont.load({
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <NotesProvider>
-      <App />
+      <TagsProvider>
+        <App />
+      </TagsProvider>
     </NotesProvider>
   </StrictMode>
 );

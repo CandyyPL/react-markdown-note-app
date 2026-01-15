@@ -21,13 +21,12 @@ import { z } from 'zod';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { NoteDataSchema, type TagData } from '@/types/note';
-import { useContext } from 'react';
-import { NotesContext, type NotesContextType } from '@/context/NotesContext';
-import { TagsContext, type TagsContextType } from '@/context/TagsContext';
+import useNotes from '@/hooks/useNotes';
+import useTags from '@/hooks/useTags';
 
 const NewNote = () => {
-  const { onCreateNote } = useContext<NotesContextType>(NotesContext);
-  const { tags } = useContext<TagsContextType>(TagsContext);
+  const { onCreateNote } = useNotes();
+  const { tags } = useTags();
 
   const form = useForm<z.infer<typeof NoteDataSchema>>({
     resolver: zodResolver(NoteDataSchema),

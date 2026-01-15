@@ -20,10 +20,14 @@ import { Link } from 'react-router-dom';
 import { z } from 'zod';
 import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { NoteDataSchema, type TagData } from '@/types/note';
+import { NoteDataSchema, type NoteData, type TagData } from '@/types/note';
 import { tags } from '@/db/tags';
 
-const NoteForm = () => {
+type NoteFormProps = {
+  onSubmit: (data: NoteData) => void;
+};
+
+const NoteForm = ({ onSubmit }: NoteFormProps) => {
   const form = useForm<z.infer<typeof NoteDataSchema>>({
     resolver: zodResolver(NoteDataSchema),
     defaultValues: {
@@ -33,13 +37,13 @@ const NoteForm = () => {
     },
   });
 
-  const onSubmit = (data: z.infer<typeof NoteDataSchema>) => {
-    console.log(data);
+  const _onSubmit = (data: z.infer<typeof NoteDataSchema>) => {
     form.reset();
+    onSubmit(data);
   };
 
   return (
-    <form onSubmit={form.handleSubmit(onSubmit)}>
+    <form onSubmit={form.handleSubmit(_onSubmit)}>
       <FieldSet>
         <FieldGroup>
           <div className='grid grid-cols-2 gap-4'>

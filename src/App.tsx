@@ -18,6 +18,9 @@ const App = () => {
     [notes, tags]
   );
 
+  const onCreateNote = (data: NoteData) =>
+    setNotes((prev) => [...prev, { ...data, id: crypto.randomUUID() }]);
+
   return (
     <Router>
       <Routes>
@@ -27,7 +30,7 @@ const App = () => {
         />
         <Route
           path='/new'
-          element={<NewNote />}
+          element={<NewNote onSubmit={onCreateNote} />}
         />
       </Routes>
     </Router>

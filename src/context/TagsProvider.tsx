@@ -1,6 +1,6 @@
 import { TagsContext, type TagsContextType } from '@/context/TagsContext';
 import useLocalStorage from '@/hooks/useLocalStorage';
-import type { Tag } from '@/types/note';
+import type { Tag } from '@/types/tag';
 import type React from 'react';
 import { tags as dbTags } from '@/db/tags';
 

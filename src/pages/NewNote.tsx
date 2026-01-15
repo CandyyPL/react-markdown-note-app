@@ -16,11 +16,12 @@ import {
   MultiSelectValue,
 } from '@/components/ui/multi-select';
 import { Textarea } from '@/components/ui/textarea';
+import { useForm, Controller } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { z } from 'zod';
-import { useForm, Controller } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { NoteDataSchema, type TagData } from '@/types/note';
+import { NoteDataSchema } from '@/types/note';
+import type { TagData } from '@/types/tag';
 import useNotes from '@/hooks/useNotes';
 import useTags from '@/hooks/useTags';
 

@@ -7,6 +7,4 @@ export type NotesContextType = {
   onCreateNote: (data: NoteData) => void;
 };
 
-export const NotesContext = createContext<NotesContextType>(
-  {} as NotesContextType
-);
+export const NotesContext = createContext<NotesContextType | null>(null);

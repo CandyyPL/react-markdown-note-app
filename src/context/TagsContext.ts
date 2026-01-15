@@ -7,4 +7,4 @@ export type TagsContextType = {
   setTags: React.Dispatch<SetStateAction<Tag[]>>;
 };
 
-export const TagsContext = createContext({} as TagsContextType);
+export const TagsContext = createContext<TagsContextType | null>(null);

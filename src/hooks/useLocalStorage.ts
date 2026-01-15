@@ -5,6 +5,7 @@ const useLocalStorage = <T>(key: string, initialValue: T | (() => T)) => {
     const jsonValue = localStorage.getItem(key);
     if (jsonValue == null) {
       if (typeof initialValue == 'function') return (initialValue as () => T)();
+      else return initialValue;
     } else {
       return JSON.parse(jsonValue);
     }

@@ -1,6 +1,6 @@
-import type { Tag } from '@/types/note';
+import type { TagData } from '@/types/note';
 
-export const tags: Tag[] = [
+export const tags: TagData[] = [
   {
     label: 'First',
     value: 'tag-first',

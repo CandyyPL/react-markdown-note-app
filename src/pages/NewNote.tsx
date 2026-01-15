@@ -38,7 +38,7 @@ const NewNote = () => {
     },
   });
 
-  const _onSubmit = (data: z.infer<typeof NoteDataSchema>) => {
+  const onSubmit = (data: z.infer<typeof NoteDataSchema>) => {
     form.reset();
     onCreateNote(data);
   };
@@ -46,7 +46,7 @@ const NewNote = () => {
   return (
     <section className='container mx-auto my-4 max-w-200'>
       <h1 className='mb-4 text-4xl font-semibold'>Create new note</h1>
-      <form onSubmit={form.handleSubmit(_onSubmit)}>
+      <form onSubmit={form.handleSubmit(onSubmit)}>
         <FieldSet>
           <FieldGroup>
             <div className='grid grid-cols-2 gap-4'>

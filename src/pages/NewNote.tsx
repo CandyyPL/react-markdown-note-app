@@ -17,7 +17,7 @@ import {
 } from '@/components/ui/multi-select';
 import { Textarea } from '@/components/ui/textarea';
 import { useForm, Controller } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { NoteDataSchema } from '@/types/note';
@@ -28,6 +28,8 @@ import useTags from '@/hooks/useTags';
 const NewNote = () => {
   const { onCreateNote } = useNotes();
   const { tags } = useTags();
+
+  const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof NoteDataSchema>>({
     resolver: zodResolver(NoteDataSchema),
@@ -41,6 +43,7 @@ const NewNote = () => {
   const onSubmit = (data: z.infer<typeof NoteDataSchema>) => {
     form.reset();
     onCreateNote(data);
+    navigate('/');
   };
 
   return (

@@ -9,8 +9,10 @@ type TagsProviderProps = {
 };
 
 const TagsProvider = ({ children }: TagsProviderProps) => {
-  const [tags, setTags] = useLocalStorage<Tag[]>('tags', () =>
-    dbTags.map((tag) => ({ ...tag, id: crypto.randomUUID() }))
+  const [tags, setTags] = useLocalStorage<Tag[]>(
+    'tags',
+    /*() =>
+    dbTags.map((tag) => ({ ...tag, id: crypto.randomUUID() }))*/ []
   );
 
   const onCreateTag = (data: TagData) => {

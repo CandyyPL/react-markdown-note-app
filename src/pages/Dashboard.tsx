@@ -1,4 +1,4 @@
-import NewTag from '@/components/NewTag';
+import Tags from '@/components/Tags';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 
@@ -21,7 +21,7 @@ const Dashboard = () => {
           className='w-full'>
           <Button className='w-full cursor-pointer'>Create new Note</Button>
         </Link>
-        <NewTag />
+        <Tags />
       </div>
     </main>
   );

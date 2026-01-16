@@ -1,7 +1,5 @@
-import { Button } from '@/components/ui/button';
 import {
   Dialog,
-  DialogTrigger,
   DialogHeader,
   DialogTitle,
   DialogDescription,
@@ -16,14 +14,22 @@ import {
   FieldLabel,
   FieldSet,
 } from '@/components/ui/field';
+import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import useTags from '@/hooks/useTags';
 import { TagSchema } from '@/types/tag';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Controller, useForm } from 'react-hook-form';
 import type z from 'zod';
+import type React from 'react';
+import type { SetStateAction } from 'react';
 
-const NewTag = () => {
+type TagsDialogProps = {
+  open: boolean;
+  setOpen: React.Dispatch<SetStateAction<boolean>>;
+};
+
+const TagsDialog = ({ open, setOpen }: TagsDialogProps) => {
   const { onCreateTag } = useTags();
 
   const form = useForm<z.infer<typeof TagSchema>>({
@@ -40,10 +46,9 @@ const NewTag = () => {
   };
 
   return (
-    <Dialog>
-      <DialogTrigger asChild>
-        <Button className='cursor-pointer'>Create new Tag</Button>
-      </DialogTrigger>
+    <Dialog
+      open={open}
+      onOpenChange={setOpen}>
       <DialogContent>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -115,4 +120,4 @@ const NewTag = () => {
     </Dialog>
   );
 };
-export default NewTag;
+export default TagsDialog;

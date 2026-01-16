@@ -10,6 +10,7 @@ import {
 import useNotes from '@/hooks/useNotes';
 import useTags from '@/hooks/useTags';
 import type { Note } from '@/types/note';
+import { Link } from 'react-router-dom';
 
 const NoteList = () => {
   const { notes } = useNotes();
@@ -39,11 +40,13 @@ const NoteList = () => {
                 </ItemDescription>
               </ItemContent>
               <ItemActions>
-                <Button
-                  variant='outline'
-                  className='cursor-pointer'>
-                  Preview
-                </Button>
+                <Link to={`/note/${note.id}`}>
+                  <Button
+                    variant='outline'
+                    className='cursor-pointer'>
+                    Preview
+                  </Button>
+                </Link>
               </ItemActions>
             </Item>
           </li>

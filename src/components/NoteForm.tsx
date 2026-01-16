@@ -20,7 +20,7 @@ import { Controller, type UseFormReturn } from 'react-hook-form';
 import useTags from '@/hooks/useTags';
 import type z from 'zod';
 import type { NoteDataSchema } from '@/types/note';
-import type { TagData } from '@/types/tag';
+import type { Tag } from '@/types/tag';
 import { Link } from 'react-router-dom';
 
 type NoteFormProps = {
@@ -68,9 +68,9 @@ const NoteForm = ({ form, onSubmit }: NoteFormProps) => {
                     </MultiSelectTrigger>
                     <MultiSelectContent search={false}>
                       <MultiSelectGroup>
-                        {tags.map((tag: TagData) => (
+                        {tags.map((tag: Tag) => (
                           <MultiSelectItem
-                            value={tag.value}
+                            value={tag.id}
                             className='cursor-pointer'>
                             {tag.label}
                           </MultiSelectItem>

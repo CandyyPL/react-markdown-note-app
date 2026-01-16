@@ -63,13 +63,15 @@ const NoteForm = ({ form, onSubmit }: NoteFormProps) => {
                   <MultiSelect
                     onValuesChange={field.onChange}
                     values={field.value}>
-                    <MultiSelectTrigger>
+                    <MultiSelectTrigger className='cursor-pointer'>
                       <MultiSelectValue placeholder='Select tags...' />
                     </MultiSelectTrigger>
                     <MultiSelectContent search={false}>
                       <MultiSelectGroup>
                         {tags.map((tag: TagData) => (
-                          <MultiSelectItem value={tag.value}>
+                          <MultiSelectItem
+                            value={tag.value}
+                            className='cursor-pointer'>
                             {tag.label}
                           </MultiSelectItem>
                         ))}

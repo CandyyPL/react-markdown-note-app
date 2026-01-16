@@ -1,13 +1,13 @@
 import { NotesContext, type NotesContextType } from '@/context/NotesContext';
 import useLocalStorage from '@/hooks/useLocalStorage';
-import type { NoteData } from '@/types/note';
+import type { Note, NoteData } from '@/types/note';
 
 type NotesProviderProps = {
   children: React.ReactNode;
 };
 
 const NotesProvider = ({ children }: NotesProviderProps) => {
-  const [notes, setNotes] = useLocalStorage<NoteData[]>('notes', []);
+  const [notes, setNotes] = useLocalStorage<Note[]>('notes', []);
 
   const onCreateNote = (data: NoteData) =>
     setNotes((prev) => [...prev, { ...data, id: crypto.randomUUID() }]);

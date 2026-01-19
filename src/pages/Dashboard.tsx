@@ -14,8 +14,8 @@ const Dashboard = () => {
   // );
 
   return (
-    <main className='p-4'>
-      <div className='flex justify-between'>
+    <main className='m-auto max-w-200 pt-4'>
+      <div className='flex w-full justify-between'>
         <h1 className='mb-4 text-4xl font-semibold'>Dashboard</h1>
         <div className='grid grid-cols-2 gap-2'>
           <Link

@@ -8,7 +8,7 @@ const SingleNote = () => {
   const note = notes.find((note) => note.id === noteId);
 
   return (
-    <main className='m-4'>
+    <main className='m-auto max-w-200 pt-4'>
       <h1 className='text-4xl font-semibold'>{note?.title}</h1>
     </main>
   );

@@ -27,7 +27,6 @@ const Dashboard = () => {
         </div>
       </div>
       <div>
-        <h3 className='text-2xl font-semibold'>Note List</h3>
         <NoteList />
       </div>
     </main>

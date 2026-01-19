@@ -7,21 +7,12 @@ import {
   FieldSet,
 } from '@/components/ui/field';
 import { Input } from '@/components/ui/input';
-import {
-  MultiSelect,
-  MultiSelectContent,
-  MultiSelectGroup,
-  MultiSelectItem,
-  MultiSelectTrigger,
-  MultiSelectValue,
-} from '@/components/ui/multi-select';
 import { Textarea } from '@/components/ui/textarea';
 import { Controller, type UseFormReturn } from 'react-hook-form';
-import useTags from '@/hooks/useTags';
 import type z from 'zod';
 import type { NoteDataSchema } from '@/types/note';
-import type { Tag } from '@/types/tag';
 import { Link } from 'react-router-dom';
+import MultiSelectField from '@/components/MultiSelectField';
 
 type NoteFormProps = {
   form: UseFormReturn<z.infer<typeof NoteDataSchema>>;
@@ -29,8 +20,6 @@ type NoteFormProps = {
 };
 
 const NoteForm = ({ form, onSubmit }: NoteFormProps) => {
-  const { tags } = useTags();
-
   return (
     <form onSubmit={form.handleSubmit(onSubmit)}>
       <FieldSet>
@@ -60,24 +49,7 @@ const NoteForm = ({ form, onSubmit }: NoteFormProps) => {
               render={({ field, fieldState }) => (
                 <Field data-invalid={fieldState.invalid}>
                   <FieldLabel className='text-xl'>Tags</FieldLabel>
-                  <MultiSelect
-                    onValuesChange={field.onChange}
-                    values={field.value}>
-                    <MultiSelectTrigger className='cursor-pointer'>
-                      <MultiSelectValue placeholder='Select tags...' />
-                    </MultiSelectTrigger>
-                    <MultiSelectContent search={false}>
-                      <MultiSelectGroup>
-                        {tags.map((tag: Tag) => (
-                          <MultiSelectItem
-                            value={tag.id}
-                            className='cursor-pointer'>
-                            {tag.label}
-                          </MultiSelectItem>
-                        ))}
-                      </MultiSelectGroup>
-                    </MultiSelectContent>
-                  </MultiSelect>
+                  <MultiSelectField onChange={field.onChange} />
                 </Field>
               )}
             />

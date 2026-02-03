@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import useNotes from '@/hooks/useNotes';
 import useTags from '@/hooks/useTags';
 import { Link, Navigate, useParams } from 'react-router-dom';
+import Markdown from 'react-markdown';
 
 const SingleNote = () => {
   const { id: noteId } = useParams();
@@ -45,6 +46,9 @@ const SingleNote = () => {
             <Badge key={id}>{tags.find((tag) => tag.id === id)?.label}</Badge>
           ))}
       </span>
+      <section className='mt-12'>
+        <Markdown>{note.body}</Markdown>
+      </section>
     </main>
   );
 };

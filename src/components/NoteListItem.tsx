@@ -37,11 +37,25 @@ const NoteListItem = ({ note }: NoteListItemProps) => {
         <ItemActions>
           <Link to={`/note/${note.id}`}>
             <Button
-              variant='outline'
+              variant='default'
               className='cursor-pointer'>
-              Preview
+              Open
             </Button>
           </Link>
+          {/* <Link to={``}>
+            <Button
+              variant='outline'
+              className='cursor-pointer'>
+              Edit
+            </Button>
+          </Link>
+          <Link to={``}>
+            <Button
+              variant='destructive'
+              className='cursor-pointer'>
+              Delete
+            </Button>
+          </Link> */}
         </ItemActions>
       </Item>
     </li>

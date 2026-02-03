@@ -46,7 +46,7 @@ const SingleNote = () => {
             <Badge key={id}>{tags.find((tag) => tag.id === id)?.label}</Badge>
           ))}
       </span>
-      <section className='mt-12'>
+      <section className='markdown mt-12'>
         <Markdown>{note.body}</Markdown>
       </section>
     </main>

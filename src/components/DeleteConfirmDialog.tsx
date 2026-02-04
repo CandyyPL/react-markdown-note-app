@@ -31,11 +31,7 @@ const DeleteConfirmDialog = ({
       onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader>
-          {/* <DialogTitle>Confirm note deletion</DialogTitle> */}
           <DialogTitle>{dialogTitle}</DialogTitle>
-          {/* <DialogDescription>
-            Make sure you want to delete this note.
-          </DialogDescription> */}
           <DialogDescription>{dialogDescription}</DialogDescription>
         </DialogHeader>
         <DialogFooter>

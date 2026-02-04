@@ -31,6 +31,8 @@ const SingleNote = () => {
         open={deleteConfirmOpen}
         setOpen={setDeleteConfirmOpen}
         confirmDelete={handleDeleteNote}
+        dialogTitle='Confirm note deletion'
+        dialogDescription='Make sure you want to delete this note.'
       />
       <div className='flex justify-between'>
         <h1 className='mb-4 grow-3 text-4xl font-semibold'>{note?.title}</h1>

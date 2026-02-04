@@ -22,11 +22,11 @@ const Dashboard = () => {
             className='w-full'>
             <Button className='w-full cursor-pointer'>Create new Note</Button>
           </Link>
-          {/* <Link
+          <Link
             to='/tags'
             className='w-full'>
             <Button className='w-full cursor-pointer'>Manage Tags</Button>
-          </Link> */}
+          </Link>
         </div>
       </div>
       <div>

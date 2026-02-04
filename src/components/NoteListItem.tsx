@@ -23,7 +23,7 @@ const NoteListItem = ({ note }: NoteListItemProps) => {
           variant='outline'
           className='h-25 w-200 transition-shadow hover:shadow-md'>
           <ItemContent>
-            <ItemTitle className='text-2xl font-semibold'>
+            <ItemTitle className='line-clamp-1 text-2xl font-semibold'>
               {note.title}
             </ItemTitle>
             <ItemDescription className='flex flex-wrap gap-1'>

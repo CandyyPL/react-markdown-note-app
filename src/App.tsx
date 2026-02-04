@@ -3,6 +3,7 @@ import Dashboard from '@/pages/Dashboard';
 import NewNote from '@/pages/NewNote';
 import SingleNote from '@/pages/SingleNote';
 import TagManager from '@/pages/TagManager';
+import EditNote from '@/pages/EditNote';
 
 const App = () => {
   return (
@@ -20,6 +21,10 @@ const App = () => {
           <Route
             path='/note/:id'
             element={<SingleNote />}
+          />
+          <Route
+            path='/note/:id/edit'
+            element={<EditNote />}
           />
           <Route
             path='/tags'

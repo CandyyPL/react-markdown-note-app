@@ -15,7 +15,7 @@ const SingleNote = () => {
   if (!note) return <Navigate to='/' />;
 
   return (
-    <main className='m-auto max-w-200 pt-4'>
+    <section>
       <div className='flex justify-between'>
         <h1 className='mb-4 grow-3 text-4xl font-semibold'>{note?.title}</h1>
         <div className='flex gap-2'>
@@ -49,7 +49,7 @@ const SingleNote = () => {
       <section className='markdown mt-12'>
         <Markdown>{note.body}</Markdown>
       </section>
-    </main>
+    </section>
   );
 };
 export default SingleNote;

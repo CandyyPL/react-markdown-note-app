@@ -14,12 +14,16 @@ type DeleteConfirmDialogProps = {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
   confirmDelete: () => void;
+  dialogTitle: string;
+  dialogDescription: string;
 };
 
 const DeleteConfirmDialog = ({
   open,
   setOpen,
   confirmDelete,
+  dialogTitle,
+  dialogDescription,
 }: DeleteConfirmDialogProps) => {
   return (
     <Dialog
@@ -27,10 +31,12 @@ const DeleteConfirmDialog = ({
       onOpenChange={setOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Confirm note deletion</DialogTitle>
-          <DialogDescription>
+          {/* <DialogTitle>Confirm note deletion</DialogTitle> */}
+          <DialogTitle>{dialogTitle}</DialogTitle>
+          {/* <DialogDescription>
             Make sure you want to delete this note.
-          </DialogDescription>
+          </DialogDescription> */}
+          <DialogDescription>{dialogDescription}</DialogDescription>
         </DialogHeader>
         <DialogFooter>
           <DialogClose asChild>

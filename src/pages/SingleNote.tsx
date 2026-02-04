@@ -2,13 +2,24 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import useNotes from '@/hooks/useNotes';
 import useTags from '@/hooks/useTags';
-import { Link, Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import Markdown from 'react-markdown';
+import { useState } from 'react';
+import DeleteConfirmDialog from '@/components/DeleteConfirmDialog';
 
 const SingleNote = () => {
   const { id: noteId } = useParams();
-  const { notes } = useNotes();
+  const { notes, setNotes } = useNotes();
   const { tags } = useTags();
+  const navigate = useNavigate();
+
+  const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
+
+  const handleDeleteNote = () => {
+    setDeleteConfirmOpen(false);
+    setNotes((prev) => prev.filter((note) => note.id !== noteId));
+    navigate('/');
+  };
 
   const note = notes.find((note) => note.id === noteId);
 
@@ -16,6 +27,11 @@ const SingleNote = () => {
 
   return (
     <section>
+      <DeleteConfirmDialog
+        open={deleteConfirmOpen}
+        setOpen={setDeleteConfirmOpen}
+        confirmDelete={handleDeleteNote}
+      />
       <div className='flex justify-between'>
         <h1 className='mb-4 grow-3 text-4xl font-semibold'>{note?.title}</h1>
         <div className='flex gap-2'>
@@ -28,7 +44,8 @@ const SingleNote = () => {
           </Link>
           <Button
             variant='destructive'
-            className='cursor-pointer'>
+            className='cursor-pointer'
+            onClick={() => setDeleteConfirmOpen(true)}>
             Delete
           </Button>
           <Link to='..'>

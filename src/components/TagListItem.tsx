@@ -1,3 +1,4 @@
+import DeleteConfirmDialog from '@/components/DeleteConfirmDialog';
 import EditTagDialog from '@/components/EditTagDialog';
 import { Button } from '@/components/ui/button';
 import {
@@ -7,16 +8,36 @@ import {
   ItemDescription,
   ItemTitle,
 } from '@/components/ui/item';
-import type { Tag } from '@/types/tag';
+import useTags from '@/hooks/useTags';
+import type { Tag, TagData } from '@/types/tag';
 import { useState } from 'react';
 
 type TagListItemProps = {
-  key: string;
+  key_: string;
   tag: Tag;
 };
 
-const TagListItem = ({ key, tag }: TagListItemProps) => {
+const TagListItem = ({ key_: key, tag }: TagListItemProps) => {
   const [isTagEditDialogOpen, setIsTagEditDialogOpen] = useState(false);
+  const [isTagDeleteDialogOpen, setIsTagDeleteDialogOpen] = useState(false);
+
+  const { setTags } = useTags();
+
+  const handleEditTag = (data: TagData) => {
+    setIsTagEditDialogOpen(false);
+
+    setTags((prev) =>
+      prev.map((t) => {
+        if (t.id === tag.id) {
+          return { id: t.id, ...data };
+        } else return t;
+      })
+    );
+  };
+
+  const handleDeleteTag = () => {
+    setTags((prev) => prev.filter((t) => t.id !== tag.id));
+  };
 
   return (
     <>
@@ -24,6 +45,16 @@ const TagListItem = ({ key, tag }: TagListItemProps) => {
         tag={tag}
         open={isTagEditDialogOpen}
         setOpen={setIsTagEditDialogOpen}
+        handleEdit={handleEditTag}
+        dialogTitle='Edit tag'
+        dialogDescription='Edit tag label and ID.'
+      />
+      <DeleteConfirmDialog
+        open={isTagDeleteDialogOpen}
+        setOpen={setIsTagDeleteDialogOpen}
+        confirmDelete={handleDeleteTag}
+        dialogTitle='Confirm tag deletion'
+        dialogDescription='Make sure you want to delete this tag.'
       />
       <li key={key}>
         <Item
@@ -42,6 +73,12 @@ const TagListItem = ({ key, tag }: TagListItemProps) => {
               className='cursor-pointer'
               onClick={() => setIsTagEditDialogOpen(true)}>
               Edit
+            </Button>
+            <Button
+              variant='destructive'
+              className='cursor-pointer'
+              onClick={() => setIsTagDeleteDialogOpen(true)}>
+              Delete
             </Button>
           </ItemActions>
         </Item>

@@ -12,6 +12,8 @@ const TagManager = () => {
       <NewTagDialog
         open={isTagDialogOpen}
         setOpen={setIsTagDialogOpen}
+        dialogTitle='Create new tag'
+        dialogDescription='Enter a new label and ID.'
       />
       <div className='flex w-full justify-between'>
         <h1 className='mb-4 text-4xl font-semibold'>Tag Manager</h1>

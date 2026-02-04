@@ -1,6 +1,5 @@
 import { Dialog, DialogContent } from '@/components/ui/dialog';
-import useTags from '@/hooks/useTags';
-import { TagSchema, type Tag } from '@/types/tag';
+import { TagSchema, type Tag, type TagData } from '@/types/tag';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import type z from 'zod';
@@ -12,11 +11,19 @@ type TagDialogProps = {
   tag: Tag;
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
+  handleEdit: (data: TagData) => void;
+  dialogTitle: string;
+  dialogDescription: string;
 };
 
-const EditTagDialog = ({ tag, open, setOpen }: TagDialogProps) => {
-  const { setTags } = useTags();
-
+const EditTagDialog = ({
+  tag,
+  open,
+  setOpen,
+  handleEdit,
+  dialogTitle,
+  dialogDescription,
+}: TagDialogProps) => {
   const form = useForm<z.infer<typeof TagSchema>>({
     resolver: zodResolver(TagSchema),
     defaultValues: {
@@ -30,14 +37,7 @@ const EditTagDialog = ({ tag, open, setOpen }: TagDialogProps) => {
 
   const onSubmit = (data: z.infer<typeof TagSchema>) => {
     form.reset();
-    setTags((prev) =>
-      prev.map((t) => {
-        if (t.id === tag.id) {
-          return { id: t.id, ...data };
-        } else return t;
-      })
-    );
-    setOpen(false);
+    handleEdit(data);
   };
 
   return (
@@ -48,8 +48,8 @@ const EditTagDialog = ({ tag, open, setOpen }: TagDialogProps) => {
         <TagForm
           form={form}
           onSubmit={onSubmit}
-          dialogTitle='Edit tag'
-          dialogDescription='Edit tag label and ID.'
+          dialogTitle={dialogTitle}
+          dialogDescription={dialogDescription}
         />
       </DialogContent>
     </Dialog>

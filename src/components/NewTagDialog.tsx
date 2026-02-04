@@ -11,9 +11,16 @@ import TagForm from '@/components/TagForm';
 type TagDialogProps = {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
+  dialogTitle: string;
+  dialogDescription: string;
 };
 
-const NewTagDialog = ({ open, setOpen }: TagDialogProps) => {
+const NewTagDialog = ({
+  open,
+  setOpen,
+  dialogTitle,
+  dialogDescription,
+}: TagDialogProps) => {
   const { onCreateTag } = useTags();
 
   const form = useForm<z.infer<typeof TagSchema>>({
@@ -37,8 +44,8 @@ const NewTagDialog = ({ open, setOpen }: TagDialogProps) => {
         <TagForm
           form={form}
           onSubmit={onSubmit}
-          dialogTitle='Create new tag'
-          dialogDescription='Enter a new label and ID.'
+          dialogTitle={dialogTitle}
+          dialogDescription={dialogDescription}
         />
       </DialogContent>
     </Dialog>

@@ -3,15 +3,6 @@ import { Button } from '@/components/ui/button';
 import NoteList from '@/components/NoteList';
 
 const Dashboard = () => {
-  // const notesWithTags = useMemo(
-  //   () =>
-  //     notes.map((note) => ({
-  //       ...note,
-  //       tags: tags.filter((tag) => note.tagIds.includes(tag.id)),
-  //     })),
-  //   [notes, tags]
-  // );
-
   return (
     <section>
       <div className='flex w-full justify-between'>

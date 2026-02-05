@@ -16,7 +16,11 @@ const Dashboard = () => {
           <Link
             to='/tags'
             className='w-full'>
-            <Button className='w-full cursor-pointer'>Manage Tags</Button>
+            <Button
+              variant='secondary'
+              className='w-full cursor-pointer'>
+              Manage Tags
+            </Button>
           </Link>
         </div>
       </div>

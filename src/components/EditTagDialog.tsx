@@ -27,13 +27,10 @@ const EditTagDialog = ({
   const form = useForm<z.infer<typeof TagSchema>>({
     resolver: zodResolver(TagSchema),
     defaultValues: {
-      label: '',
-      value: '',
+      label: tag.label,
+      value: tag.value,
     },
   });
-
-  form.setValue('label', tag.label);
-  form.setValue('value', tag.value);
 
   const onSubmit = (data: z.infer<typeof TagSchema>) => {
     form.reset();

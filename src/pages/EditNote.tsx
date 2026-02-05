@@ -11,22 +11,18 @@ const EditNote = () => {
   const { notes, setNotes } = useNotes();
   const navigate = useNavigate();
 
+  const note = notes.find((note) => note.id === noteId);
+
   const form = useForm<z.infer<typeof NoteDataSchema>>({
     resolver: zodResolver(NoteDataSchema),
     defaultValues: {
-      title: '',
-      body: '',
-      tagIds: [],
+      title: note?.title,
+      body: note?.body,
+      tagIds: note?.tagIds,
     },
   });
 
-  const note = notes.find((note) => note.id === noteId);
-
   if (!note) return <Navigate to='/' />;
-
-  form.setValue('title', note.title);
-  form.setValue('tagIds', note.tagIds);
-  form.setValue('body', note.body);
 
   const onSubmit = (data: z.infer<typeof NoteDataSchema>) => {
     form.reset();

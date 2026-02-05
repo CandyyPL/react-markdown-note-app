@@ -14,11 +14,10 @@ import type { Tag, TagData } from '@/types/tag';
 import { useState } from 'react';
 
 type TagListItemProps = {
-  key_: string;
   tag: Tag;
 };
 
-const TagListItem = ({ key_: key, tag }: TagListItemProps) => {
+const TagListItem = ({ tag }: TagListItemProps) => {
   const [isTagEditDialogOpen, setIsTagEditDialogOpen] = useState(false);
   const [isTagDeleteDialogOpen, setIsTagDeleteDialogOpen] = useState(false);
   const [isTagUsedDialogOpen, setIsTagUsedDialogOpen] = useState(false);
@@ -67,7 +66,7 @@ const TagListItem = ({ key_: key, tag }: TagListItemProps) => {
         open={isTagUsedDialogOpen}
         setOpen={setIsTagUsedDialogOpen}
       />
-      <li key={key}>
+      <li>
         <Item
           variant='outline'
           className='h-25 w-200 transition-shadow hover:shadow-md'>

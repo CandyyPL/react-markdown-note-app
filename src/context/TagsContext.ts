@@ -6,6 +6,7 @@ export type TagsContextType = {
   tags: Tag[];
   setTags: React.Dispatch<SetStateAction<Tag[]>>;
   onCreateTag: (data: TagData) => void;
+  isTagUsed: (tag: Tag) => boolean;
 };
 
 export const TagsContext = createContext<TagsContextType | null>(null);

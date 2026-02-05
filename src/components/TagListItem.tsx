@@ -1,5 +1,6 @@
 import DeleteConfirmDialog from '@/components/DeleteConfirmDialog';
 import EditTagDialog from '@/components/EditTagDialog';
+import TagUsedDialog from '@/components/TagUsedDialog';
 import { Button } from '@/components/ui/button';
 import {
   Item,
@@ -20,8 +21,9 @@ type TagListItemProps = {
 const TagListItem = ({ key_: key, tag }: TagListItemProps) => {
   const [isTagEditDialogOpen, setIsTagEditDialogOpen] = useState(false);
   const [isTagDeleteDialogOpen, setIsTagDeleteDialogOpen] = useState(false);
+  const [isTagUsedDialogOpen, setIsTagUsedDialogOpen] = useState(false);
 
-  const { setTags } = useTags();
+  const { setTags, isTagUsed } = useTags();
 
   const handleEditTag = (data: TagData) => {
     setIsTagEditDialogOpen(false);
@@ -36,6 +38,11 @@ const TagListItem = ({ key_: key, tag }: TagListItemProps) => {
   };
 
   const handleDeleteTag = () => {
+    if (isTagUsed(tag)) setIsTagUsedDialogOpen(true);
+    else deleteTag();
+  };
+
+  const deleteTag = () => {
     setTags((prev) => prev.filter((t) => t.id !== tag.id));
   };
 
@@ -55,6 +62,10 @@ const TagListItem = ({ key_: key, tag }: TagListItemProps) => {
         confirmDelete={handleDeleteTag}
         dialogTitle='Confirm tag deletion'
         dialogDescription='Make sure you want to delete this tag.'
+      />
+      <TagUsedDialog
+        open={isTagUsedDialogOpen}
+        setOpen={setIsTagUsedDialogOpen}
       />
       <li key={key}>
         <Item
@@ -77,7 +88,7 @@ const TagListItem = ({ key_: key, tag }: TagListItemProps) => {
             <Button
               variant='destructive'
               className='cursor-pointer'
-              onClick={() => setIsTagDeleteDialogOpen(true)}>
+              onClick={() => handleDeleteTag()}>
               Delete
             </Button>
           </ItemActions>

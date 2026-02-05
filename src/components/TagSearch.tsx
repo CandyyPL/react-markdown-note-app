@@ -17,7 +17,7 @@ const TagSearch = ({ onSearchValueChange, onMethodChange }: TagSearchProps) => {
         placeholder='Search tags'
         className='col-span-4'
       />
-      <div className='col-span-2 col-start-5 flex items-center justify-between px-4'>
+      <div className='col-span-2 col-start-5 flex items-center justify-between pl-4'>
         <p>Search by:</p>
         <RadioGroup
           defaultValue='label'

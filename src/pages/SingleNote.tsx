@@ -37,7 +37,7 @@ const SingleNote = () => {
       <div className='flex justify-between'>
         <h1 className='mb-4 grow-3 text-4xl font-semibold'>{note?.title}</h1>
       </div>
-      <span className='gap-2'>
+      <span className='flex gap-2'>
         {note.tagIds.length > 0 &&
           note.tagIds.map((id) => (
             <Badge key={id}>{tags.find((tag) => tag.id === id)?.label}</Badge>

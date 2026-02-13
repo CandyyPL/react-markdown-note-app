@@ -38,7 +38,7 @@ const TagListItem = ({ tag }: TagListItemProps) => {
 
   const handleDeleteTag = () => {
     if (isTagUsed(tag)) setIsTagUsedDialogOpen(true);
-    else deleteTag();
+    else setIsTagDeleteDialogOpen(true);
   };
 
   const deleteTag = () => {
@@ -58,7 +58,7 @@ const TagListItem = ({ tag }: TagListItemProps) => {
       <DeleteConfirmDialog
         open={isTagDeleteDialogOpen}
         setOpen={setIsTagDeleteDialogOpen}
-        confirmDelete={handleDeleteTag}
+        confirmDelete={deleteTag}
         dialogTitle='Confirm tag deletion'
         dialogDescription='Make sure you want to delete this tag.'
       />

@@ -8,27 +8,29 @@ const TagManager = () => {
   const [isTagDialogOpen, setIsTagDialogOpen] = useState(false);
 
   return (
-    <section>
+    <section className='flex flex-col gap-4'>
       <NewTagDialog
         open={isTagDialogOpen}
         setOpen={setIsTagDialogOpen}
         dialogTitle='Create new tag'
         dialogDescription='Enter a new label and ID.'
       />
-      <div className='flex w-full justify-between'>
-        <h1 className='mb-4 text-4xl font-semibold'>Tag Manager</h1>
-        <div className='grid grid-cols-2 gap-2'>
-          <Button
-            className='w-full cursor-pointer'
-            onClick={() => setIsTagDialogOpen(true)}>
-            Create new Tag
-          </Button>
+      <div className='flex w-full flex-col items-center justify-between gap-4'>
+        <h1 className='text-center text-4xl font-semibold'>Tag Manager</h1>
+        <div className='flex w-full items-center justify-center gap-2'>
+          <div className='w-full'>
+            <Button
+              className='text-md h-12 w-full cursor-pointer'
+              onClick={() => setIsTagDialogOpen(true)}>
+              Create new Tag
+            </Button>
+          </div>
           <Link
             to='..'
             className='w-full'>
             <Button
               variant='outline'
-              className='w-full cursor-pointer'>
+              className='text-md h-12 w-full cursor-pointer'>
               Back
             </Button>
           </Link>

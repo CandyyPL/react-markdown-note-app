@@ -7,7 +7,7 @@ import EditNote from '@/pages/EditNote';
 
 const App = () => {
   return (
-    <main className='m-auto max-w-200 pt-4'>
+    <main className='m-auto p-4'>
       <Router basename='/react-markdown-note-app'>
         <Routes>
           <Route

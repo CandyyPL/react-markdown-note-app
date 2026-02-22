@@ -47,7 +47,9 @@ const NoteForm = ({ form, onSubmit }: NoteFormProps) => {
               name='tagIds'
               control={form.control}
               render={({ field, fieldState }) => (
-                <Field data-invalid={fieldState.invalid}>
+                <Field
+                  {...field}
+                  data-invalid={fieldState.invalid}>
                   <FieldLabel className='text-xl'>Tags</FieldLabel>
                   <MultiSelectField onChange={field.onChange} />
                 </Field>
@@ -66,7 +68,7 @@ const NoteForm = ({ form, onSubmit }: NoteFormProps) => {
                   placeholder='Note Body'
                   autoComplete='off'
                   className='resize-none'
-                  rows={18}
+                  rows={14}
                 />
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />

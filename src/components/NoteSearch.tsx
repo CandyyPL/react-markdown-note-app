@@ -12,15 +12,15 @@ const NoteSearch = ({
   onSelectedTagsChange,
 }: NoteSearchProps) => {
   return (
-    <section className='grid w-full grid-cols-3 justify-between gap-2'>
+    <section className='grid w-full grid-cols-7 justify-between gap-2'>
       <Input
         onChange={onSearchValueChange}
-        className='col-span-2'
+        className='col-span-4'
         placeholder='Search title'
       />
       <MultiSelectField
         onChange={onSelectedTagsChange}
-        className='w-full'
+        className='col-span-3 w-full'
       />
     </section>
   );

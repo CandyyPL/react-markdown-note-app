@@ -79,21 +79,25 @@ const TagForm = ({
           />
         </FieldGroup>
       </FieldSet>
-      <DialogFooter>
-        <DialogClose asChild>
-          <Button
-            type='submit'
-            className='cursor-pointer'>
-            Save
-          </Button>
-        </DialogClose>
-        <DialogClose asChild>
-          <Button
-            variant='outline'
-            className='cursor-pointer'>
-            Cancel
-          </Button>
-        </DialogClose>
+      <DialogFooter className='flex-row'>
+        <div className='w-full'>
+          <DialogClose asChild>
+            <Button
+              type='submit'
+              className='w-full cursor-pointer'>
+              Save
+            </Button>
+          </DialogClose>
+        </div>
+        <div className='w-full'>
+          <DialogClose asChild>
+            <Button
+              variant='outline'
+              className='w-full cursor-pointer'>
+              Cancel
+            </Button>
+          </DialogClose>
+        </div>
       </DialogFooter>
     </form>
   );

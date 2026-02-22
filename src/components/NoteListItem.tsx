@@ -18,10 +18,12 @@ const NoteListItem = ({ note }: NoteListItemProps) => {
 
   return (
     <Link to={`/note/${note.id}`}>
-      <li key={note.id}>
+      <li
+        key={note.id}
+        className='w-full'>
         <Item
           variant='outline'
-          className='h-25 w-200 transition-shadow hover:shadow-md'>
+          className='h-25 transition-shadow hover:shadow-md'>
           <ItemContent>
             <ItemTitle className='line-clamp-1 text-2xl font-semibold'>
               {note.title}

@@ -11,13 +11,13 @@ type TagSearchProps = {
 
 const TagSearch = ({ onSearchValueChange, onMethodChange }: TagSearchProps) => {
   return (
-    <section className='grid grid-cols-6'>
+    <section className='grid grid-cols-7'>
       <Input
         onChange={onSearchValueChange}
         placeholder='Search tags'
-        className='col-span-4'
+        className='col-span-4 self-center'
       />
-      <div className='col-span-2 col-start-5 flex items-center justify-between pl-4'>
+      <div className='col-span-3 flex flex-col items-center justify-center gap-1 self-center pl-4'>
         <p>Search by:</p>
         <RadioGroup
           defaultValue='label'

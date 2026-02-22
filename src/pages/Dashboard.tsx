@@ -4,21 +4,23 @@ import NoteList from '@/components/NoteList';
 
 const Dashboard = () => {
   return (
-    <section>
-      <div className='flex w-full justify-between'>
-        <h1 className='mb-4 text-4xl font-semibold'>Dashboard</h1>
-        <div className='grid grid-cols-2 gap-2'>
+    <section className='flex flex-col gap-4'>
+      <div className='flex w-full flex-col items-center justify-between gap-4'>
+        <h1 className='text-center text-4xl font-semibold'>Dashboard</h1>
+        <div className='flex w-full items-center justify-center gap-2'>
           <Link
             to='/new'
             className='w-full'>
-            <Button className='w-full cursor-pointer'>Create new Note</Button>
+            <Button className='text-md h-12 w-full cursor-pointer'>
+              Create new Note
+            </Button>
           </Link>
           <Link
             to='/tags'
             className='w-full'>
             <Button
               variant='secondary'
-              className='w-full cursor-pointer'>
+              className='text-md h-12 w-full cursor-pointer'>
               Manage Tags
             </Button>
           </Link>

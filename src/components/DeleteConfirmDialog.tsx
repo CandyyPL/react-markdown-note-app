@@ -34,25 +34,30 @@ const DeleteConfirmDialog = ({
           <DialogTitle>{dialogTitle}</DialogTitle>
           <DialogDescription>{dialogDescription}</DialogDescription>
         </DialogHeader>
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button
-              variant='destructive'
-              className='cursor-pointer'
-              onClick={() => confirmDelete()}>
-              Delete
-            </Button>
-          </DialogClose>
-          <DialogClose asChild>
-            <Button
-              variant='outline'
-              className='cursor-pointer'>
-              Cancel
-            </Button>
-          </DialogClose>
+        <DialogFooter className='flex-row'>
+          <div className='w-full'>
+            <DialogClose asChild>
+              <Button
+                variant='destructive'
+                className='w-full cursor-pointer'
+                onClick={() => confirmDelete()}>
+                Delete
+              </Button>
+            </DialogClose>
+          </div>
+          <div className='w-full'>
+            <DialogClose asChild>
+              <Button
+                variant='outline'
+                className='w-full cursor-pointer'>
+                Cancel
+              </Button>
+            </DialogClose>
+          </div>
         </DialogFooter>
       </DialogContent>
     </Dialog>
   );
 };
+
 export default DeleteConfirmDialog;

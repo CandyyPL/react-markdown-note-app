@@ -12,7 +12,7 @@ import type { Tag } from '@/types/tag';
 
 type MultiSelectFieldProps = {
   onChange: (values: string[]) => void;
-  defaultValues: string[];
+  defaultValues?: string[];
   className?: string | ((...inputs: string[]) => string);
 };
 
@@ -26,7 +26,7 @@ const MultiSelectField = ({
   return (
     <MultiSelect
       onValuesChange={onChange}
-      defaultValues={defaultValues}>
+      defaultValues={defaultValues ?? []}>
       <MultiSelectTrigger className={cn('cursor-pointer', className)}>
         <MultiSelectValue
           overflowBehavior='cutoff'

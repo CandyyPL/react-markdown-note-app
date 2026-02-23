@@ -18,4 +18,5 @@ const NotesProvider = ({ children }: NotesProviderProps) => {
     <NotesContext.Provider value={provide}>{children}</NotesContext.Provider>
   );
 };
+
 export default NotesProvider;

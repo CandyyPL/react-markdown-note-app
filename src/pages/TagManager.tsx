@@ -15,9 +15,9 @@ const TagManager = () => {
         dialogTitle='Create new tag'
         dialogDescription='Enter a new label and ID.'
       />
-      <div className='flex w-full flex-col items-center justify-between gap-4'>
+      <div className='flex w-full flex-col items-center justify-between gap-4 md:flex-row'>
         <h1 className='text-center text-4xl font-semibold'>Tag Manager</h1>
-        <div className='flex w-full items-center justify-center gap-2'>
+        <div className='flex items-center justify-center gap-2 max-md:w-full'>
           <div className='w-full'>
             <Button
               className='text-md h-12 w-full cursor-pointer'

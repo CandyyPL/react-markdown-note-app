@@ -5,9 +5,9 @@ import NoteList from '@/components/NoteList';
 const Dashboard = () => {
   return (
     <section className='flex flex-col gap-4'>
-      <div className='flex w-full flex-col items-center justify-between gap-4'>
+      <div className='flex w-full flex-col items-center justify-between gap-4 md:flex-row'>
         <h1 className='text-center text-4xl font-semibold'>Dashboard</h1>
-        <div className='flex w-full items-center justify-center gap-2'>
+        <div className='flex items-center justify-center gap-2 max-md:w-full'>
           <Link
             to='/new'
             className='w-full'>

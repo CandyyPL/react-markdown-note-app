@@ -51,7 +51,10 @@ const NoteForm = ({ form, onSubmit }: NoteFormProps) => {
                   {...field}
                   data-invalid={fieldState.invalid}>
                   <FieldLabel className='text-xl'>Tags</FieldLabel>
-                  <MultiSelectField onChange={field.onChange} />
+                  <MultiSelectField
+                    onChange={field.onChange}
+                    defaultValues={form.getValues().tagIds}
+                  />
                 </Field>
               )}
             />

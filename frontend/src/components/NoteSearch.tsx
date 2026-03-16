@@ -15,12 +15,12 @@ const NoteSearch = ({
     <section className='grid w-full grid-cols-7 justify-between gap-2'>
       <Input
         onChange={onSearchValueChange}
-        className='col-span-4'
+        className='col-span-5'
         placeholder='Search title'
       />
       <MultiSelectField
         onChange={onSelectedTagsChange}
-        className='col-span-3 w-full'
+        className='col-span-2 w-full'
       />
     </section>
   );

@@ -5,11 +5,11 @@
   "type": "module",
   "homepage": "https://candyypl.github.io/react-markdown-note-app/",
   "scripts": {
-    "dev": "../node_modules/.bin/vite",
-    "build": "../node_modules/.bin/tsc -b && vite build",
-    "lint": "../node_modules/.bin/eslint .",
-    "preview": "../node_modules/.bin/vite preview",
-    "deploy": "../node_modules/.bin/gh-pages -d dist"
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

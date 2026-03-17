@@ -3,7 +3,9 @@ package com.candyy.backend.mappers.impl;
 import com.candyy.backend.domain.dto.TagDTO;
 import com.candyy.backend.domain.entities.TagEntity;
 import com.candyy.backend.mappers.Mapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TagMapper implements Mapper<TagEntity, TagDTO> {
     @Override
     public TagDTO mapTo(TagEntity tagEntity) {

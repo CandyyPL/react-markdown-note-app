@@ -1,4 +1,4 @@
-package com.candyy.backend.entities;
+package com.candyy.backend.domain.entities;
 
 import jakarta.persistence.*;
 

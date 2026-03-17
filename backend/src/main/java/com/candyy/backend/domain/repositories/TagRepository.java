@@ -1,6 +1,6 @@
-package com.candyy.backend.repositories;
+package com.candyy.backend.domain.repositories;
 
-import com.candyy.backend.entities.TagEntity;
+import com.candyy.backend.domain.entities.TagEntity;
 import org.springframework.data.repository.ListCrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 

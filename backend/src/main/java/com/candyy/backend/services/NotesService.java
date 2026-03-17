@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface NoteService {
+public interface NotesService {
     NoteEntity create(NoteEntity note);
 
     List<NoteEntity> findAll();

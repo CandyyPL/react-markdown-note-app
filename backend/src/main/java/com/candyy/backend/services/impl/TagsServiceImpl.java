@@ -2,7 +2,7 @@ package com.candyy.backend.services.impl;
 
 import com.candyy.backend.domain.entities.TagEntity;
 import com.candyy.backend.domain.repositories.TagRepository;
-import com.candyy.backend.services.TagService;
+import com.candyy.backend.services.TagsService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -12,10 +12,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class TagServiceImpl implements TagService {
+public class TagsServiceImpl implements TagsService {
     private final TagRepository tagRepository;
 
-    public TagServiceImpl(TagRepository tagRepository) {
+    public TagsServiceImpl(TagRepository tagRepository) {
         this.tagRepository = tagRepository;
     }
 
@@ -26,7 +26,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public List<TagEntity> findAll() {
-        return List.of();
+        return tagRepository.findAll();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class TagServiceImpl implements TagService {
 
     @Override
     public Optional<TagEntity> findOne(UUID id) {
-        return Optional.empty();
+        return tagRepository.findById(id);
     }
 
     @Override

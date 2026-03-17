@@ -2,7 +2,7 @@ package com.candyy.backend.services.impl;
 
 import com.candyy.backend.domain.entities.NoteEntity;
 import com.candyy.backend.domain.repositories.NoteRepository;
-import com.candyy.backend.services.NoteService;
+import com.candyy.backend.services.NotesService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,10 +13,10 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class NoteServiceImpl implements NoteService {
+public class NotesServiceImpl implements NotesService {
     private final NoteRepository noteRepository;
 
-    public NoteServiceImpl(NoteRepository noteRepository) {
+    public NotesServiceImpl(NoteRepository noteRepository) {
         this.noteRepository = noteRepository;
     }
 
@@ -28,7 +28,7 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public List<NoteEntity> findAll() {
-        return List.of();
+        return noteRepository.findAll();
     }
 
     @Override
@@ -38,7 +38,7 @@ public class NoteServiceImpl implements NoteService {
 
     @Override
     public Optional<NoteEntity> findOne(UUID id) {
-        return Optional.empty();
+        return noteRepository.findById(id);
     }
 
     @Override

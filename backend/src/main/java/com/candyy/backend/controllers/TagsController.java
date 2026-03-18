@@ -47,4 +47,31 @@ public class TagsController {
 
         return new ResponseEntity<>(tagDTO, HttpStatus.OK);
     }
+
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<TagDTO> partialUpdateTag(
+            @PathVariable("id") final UUID id,
+            @RequestBody final TagDTO tagDTO
+    ) {
+        if (!tagsService.exists(id)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        TagEntity tag = tagMapper.mapFrom(tagDTO);
+        TagEntity savedTag = tagsService.partialUpdate(id, tag);
+        TagDTO savedTagDTO = tagMapper.mapTo(savedTag);
+
+        return new ResponseEntity<>(savedTagDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deleteTag(@PathVariable("id") final UUID id) {
+        if (!tagsService.exists(id)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        tagsService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

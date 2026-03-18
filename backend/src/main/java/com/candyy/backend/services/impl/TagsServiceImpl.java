@@ -51,7 +51,14 @@ public class TagsServiceImpl implements TagsService {
 
     @Override
     public TagEntity partialUpdate(UUID id, TagEntity tag) {
-        return null;
+        tag.setId(id);
+
+        return tagRepository.findById(id).map(dbTag -> {
+            Optional.ofNullable(tag.getName()).ifPresent(dbTag::setName);
+            Optional.ofNullable(tag.getSlug()).ifPresent(dbTag::setSlug);
+
+            return tagRepository.save(dbTag);
+        }).orElseThrow(() -> new RuntimeException("Tag does not exist! TagsService.exist method should prevent this error from being thrown. Double check code."));
     }
 
     @Override

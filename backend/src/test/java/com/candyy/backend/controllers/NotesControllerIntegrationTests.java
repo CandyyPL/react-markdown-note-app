@@ -23,7 +23,6 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import tools.jackson.databind.ObjectMapper;
 
 import java.util.*;
-import java.util.regex.Matcher;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -34,7 +33,7 @@ public class NotesControllerIntegrationTests {
     private final ObjectMapper objectMapper;
     private final NotesService notesService;
     private final NoteRepository noteRepository;
-    private TagsService tagsService;
+    private final TagsService tagsService;
 
     @Autowired
     public NotesControllerIntegrationTests(MockMvc mockMvc, ObjectMapper objectMapper, NotesService notesService, NoteRepository noteRepository, TagsService tagsService) {

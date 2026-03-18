@@ -1,6 +1,7 @@
 package com.candyy.backend.controllers;
 
 import com.candyy.backend.TestDataUtil;
+import com.candyy.backend.domain.dto.TagDTO;
 import com.candyy.backend.domain.entities.TagEntity;
 import com.candyy.backend.domain.repositories.TagRepository;
 import com.candyy.backend.services.TagsService;
@@ -18,8 +19,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import tools.jackson.databind.ObjectMapper;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -130,6 +130,64 @@ public class TagsControllerIntegrationTests {
                 MockMvcResultMatchers.jsonPath("$.id").value(savedTag.getId().toString())
         ).andExpect(
                 MockMvcResultMatchers.jsonPath("$.name").value(savedTag.getName())
+        );
+    }
+
+    @Test
+    public void notePartialUpdateGivesCorrectResponse() throws Exception {
+        TagEntity tag = TestDataUtil.createTestTag();
+        TagEntity savedTag = tagsService.create(tag);
+
+        TagDTO updatedTag = new TagDTO(
+                null,
+                "New Title",
+                null
+        );
+
+        String updatedTagJson = objectMapper.writeValueAsString(updatedTag);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.patch("/tags/" + savedTag.getId().toString())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(updatedTagJson)
+        ).andExpect(
+                MockMvcResultMatchers.status().isOk()
+        );
+    }
+
+    @Test
+    public void tagPartialUpdateReturnsUpdatedTag() throws Exception {
+        TagEntity tag = TestDataUtil.createTestTag();
+        TagEntity savedTag = tagsService.create(tag);
+
+        TagDTO updatedTag = new TagDTO(
+                null,
+                "New Tag Name",
+                null
+        );
+
+        String updatedTagJson = objectMapper.writeValueAsString(updatedTag);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.patch("/tags/" + savedTag.getId().toString())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(updatedTagJson)
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.id").value(savedTag.getId().toString())
+        ).andExpect(
+                MockMvcResultMatchers.jsonPath("$.name").value(updatedTag.name())
+        );
+    }
+
+    @Test
+    public void tagDeleteGivesCorrectResponse() throws Exception {
+        TagEntity tag = TestDataUtil.createTestTag();
+        TagEntity savedTag = tagsService.create(tag);
+
+        mockMvc.perform(
+                MockMvcRequestBuilders.delete("/tags/" + savedTag.getId().toString())
+        ).andExpect(
+                MockMvcResultMatchers.status().isOk()
         );
     }
 }

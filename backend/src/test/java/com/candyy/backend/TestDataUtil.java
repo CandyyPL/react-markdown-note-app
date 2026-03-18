@@ -4,7 +4,6 @@ import com.candyy.backend.domain.entities.NoteEntity;
 import com.candyy.backend.domain.entities.TagEntity;
 
 import java.time.LocalDateTime;
-import java.util.Collections;
 
 public class TestDataUtil {
     public static TagEntity createTestTag() {

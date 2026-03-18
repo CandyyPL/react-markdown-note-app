@@ -14,11 +14,9 @@ import java.util.stream.Collectors;
 @Component
 public class NoteMapper implements Mapper<NoteEntity, NoteDTO> {
     private final TagsService tagsService;
-    private final TagRepository tagRepository;
 
-    public NoteMapper(TagsService tagsService, TagRepository tagRepository) {
+    public NoteMapper(TagsService tagsService) {
         this.tagsService = tagsService;
-        this.tagRepository = tagRepository;
     }
 
     @Override

@@ -36,11 +36,9 @@ public class NoteMapper implements Mapper<NoteEntity, NoteDTO> {
 
     @Override
     public NoteEntity mapFrom(NoteDTO noteDTO) {
-        List<TagEntity> tags = tagsService.findAllById(noteDTO.tagIds().stream().toList());
-
-        Set<TagEntity> tagEntities = noteDTO.tagIds().isEmpty()
-                ? null
-                : new HashSet<>(tags);
+        Set<TagEntity> tagEntities = noteDTO.tagIds() != null
+                ? new HashSet<>(tagsService.findAllById(noteDTO.tagIds().stream().toList()))
+                : null;
 
         return new NoteEntity(
                 null,

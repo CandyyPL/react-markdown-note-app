@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -61,4 +60,13 @@ public class NoteRepositoryIntegrationTests {
 
         assertThat(savedNote.getTags()).isEqualTo(tagSet);
     }
+
+//    @Test
+//    public void manyNotesCreatedAndRecalled() {}
+
+//    @Test
+//    public void noteCreatedUpdatedAndRecalled() {}
+
+//    @Test
+//    public void noteCreatedAndDeleted() {}
 }

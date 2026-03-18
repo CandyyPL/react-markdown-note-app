@@ -42,4 +42,13 @@ public class TagRepositoryIntegrationTests {
         assertThat(savedTag.getName()).isEqualTo(tag.getName());
         assertThat(savedTag.getSlug()).isEqualTo(tag.getSlug());
     }
+
+//    @Test
+//    public void manyTagsCreatedAndRecalled() {}
+
+//    @Test
+//    public void tagCreatedUpdatedAndRecalled() {}
+
+//    @Test
+//    public void tagCreatedAndDeleted() {}
 }

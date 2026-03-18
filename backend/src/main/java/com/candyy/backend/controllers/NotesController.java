@@ -47,4 +47,31 @@ public class NotesController {
 
         return new ResponseEntity<>(noteDTO, HttpStatus.OK);
     }
+
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<NoteDTO> partialUpdateNote(
+            @PathVariable("id") final UUID id,
+            @RequestBody final NoteDTO noteDTO
+    ) {
+        if (!notesService.exists(id)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        NoteEntity note = noteMapper.mapFrom(noteDTO);
+        NoteEntity savedNote = notesService.partialUpdate(id, note);
+        NoteDTO savedNoteDTO = noteMapper.mapTo(savedNote);
+
+        return new ResponseEntity<>(savedNoteDTO, HttpStatus.OK);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Void> deleteNote(@PathVariable("id") final UUID id) {
+        if (!notesService.exists(id)) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        notesService.delete(id);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

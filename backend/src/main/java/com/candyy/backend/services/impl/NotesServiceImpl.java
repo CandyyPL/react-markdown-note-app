@@ -43,16 +43,24 @@ public class NotesServiceImpl implements NotesService {
 
     @Override
     public boolean exists(UUID id) {
-        return false;
+        return noteRepository.existsById(id);
     }
 
     @Override
     public NoteEntity partialUpdate(UUID id, NoteEntity note) {
-        return null;
+        note.setId(id);
+
+        return noteRepository.findById(id).map(dbNote -> {
+            Optional.ofNullable(note.getTitle()).ifPresent(dbNote::setTitle);
+            Optional.ofNullable(note.getBody()).ifPresent(dbNote::setBody);
+            Optional.ofNullable(note.getTags()).ifPresent(dbNote::setTags);
+
+            return noteRepository.save(dbNote);
+        }).orElseThrow(() -> new RuntimeException("Note does not exist! NotesService.exist method should prevent this error from being thrown. Double check code."));
     }
 
     @Override
     public void delete(UUID id) {
-
+        noteRepository.deleteById(id);
     }
 }

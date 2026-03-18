@@ -13,6 +13,8 @@ public interface TagsService {
 
     List<TagEntity> findAll();
 
+    List<TagEntity> findAllById(Iterable<UUID> ids);
+
     Page<TagEntity> findAll(Pageable pageable);
 
     Optional<TagEntity> findOne(UUID id);

@@ -30,6 +30,11 @@ public class TagsServiceImpl implements TagsService {
     }
 
     @Override
+    public List<TagEntity> findAllById(Iterable<UUID> ids) {
+        return tagRepository.findAllById(ids);
+    }
+
+    @Override
     public Page<TagEntity> findAll(Pageable pageable) {
         return null;
     }
@@ -41,7 +46,7 @@ public class TagsServiceImpl implements TagsService {
 
     @Override
     public boolean exists(UUID id) {
-        return false;
+        return tagRepository.existsById(id);
     }
 
     @Override
@@ -51,6 +56,6 @@ public class TagsServiceImpl implements TagsService {
 
     @Override
     public void delete(UUID id) {
-
+        tagRepository.deleteById(id);
     }
 }

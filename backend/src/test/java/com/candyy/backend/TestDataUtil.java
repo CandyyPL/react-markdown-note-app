@@ -8,14 +8,20 @@ import java.util.Collections;
 
 public class TestDataUtil {
     public static TagEntity createTestTag() {
-        return new TagEntity(null, "Example Tag Name", "Example Tag Slug");
+        return new TagEntity(
+                null,
+                "Example Tag Name",
+                "Example Tag Slug"
+        );
     }
 
     public static NoteEntity createTestNote() {
-        return new NoteEntity(null,
+        return new NoteEntity(
+                null,
                 LocalDateTime.now(),
                 "Example Note Title",
                 "Example note Body",
-                Collections.emptySet());
+                null
+        );
     }
 }

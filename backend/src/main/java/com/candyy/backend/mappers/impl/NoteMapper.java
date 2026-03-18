@@ -3,7 +3,6 @@ package com.candyy.backend.mappers.impl;
 import com.candyy.backend.domain.dto.NoteDTO;
 import com.candyy.backend.domain.entities.NoteEntity;
 import com.candyy.backend.domain.entities.TagEntity;
-import com.candyy.backend.domain.repositories.TagRepository;
 import com.candyy.backend.mappers.Mapper;
 import com.candyy.backend.services.TagsService;
 import org.springframework.stereotype.Component;

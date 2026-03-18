@@ -2,7 +2,9 @@ package com.candyy.backend.repositories;
 
 import com.candyy.backend.TestDataUtil;
 import com.candyy.backend.domain.entities.TagEntity;
+import com.candyy.backend.domain.repositories.NoteRepository;
 import com.candyy.backend.domain.repositories.TagRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +18,19 @@ import static org.assertj.core.api.Assertions.assertThat;
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
 public class TagRepositoryIntegrationTests {
+    private final NoteRepository noteRepository;
     private final TagRepository tagRepository;
 
     @Autowired
-    public TagRepositoryIntegrationTests(TagRepository tagRepository) {
+    public TagRepositoryIntegrationTests(NoteRepository noteRepository, TagRepository tagRepository) {
+        this.noteRepository = noteRepository;
         this.tagRepository = tagRepository;
+    }
+
+    @BeforeEach
+    public void setup() {
+        noteRepository.deleteAll();
+        tagRepository.deleteAll();
     }
 
     @Test

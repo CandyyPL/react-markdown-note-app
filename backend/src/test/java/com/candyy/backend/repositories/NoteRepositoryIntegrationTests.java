@@ -5,6 +5,7 @@ import com.candyy.backend.domain.entities.NoteEntity;
 import com.candyy.backend.domain.entities.TagEntity;
 import com.candyy.backend.domain.repositories.NoteRepository;
 import com.candyy.backend.domain.repositories.TagRepository;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,14 +14,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_EACH_TEST_METHOD)
+@Transactional
 public class NoteRepositoryIntegrationTests {
     private final NoteRepository noteRepository;
     private final TagRepository tagRepository;
@@ -61,12 +62,49 @@ public class NoteRepositoryIntegrationTests {
         assertThat(savedNote.getTags()).isEqualTo(tagSet);
     }
 
-//    @Test
-//    public void manyNotesCreatedAndRecalled() {}
+    @Test
+    public void manyNotesCreatedAndRecalled() {
+        List<NoteEntity> notes = new ArrayList<>();
 
-//    @Test
-//    public void noteCreatedUpdatedAndRecalled() {}
+        for (var i = 0; i < 3; i++) {
+            NoteEntity note = TestDataUtil.createTestNote();
 
-//    @Test
-//    public void noteCreatedAndDeleted() {}
+            NoteEntity savedNote = noteRepository.save(note);
+
+            notes.add(savedNote);
+        }
+
+        List<NoteEntity> dbNotes = noteRepository.findAll();
+
+        assertThat(dbNotes).hasSize(3);
+        assertThat(dbNotes).containsExactlyElementsOf(notes);
+    }
+
+    @Test
+    public void noteCreatedUpdatedAndRecalled() {
+        NoteEntity note = TestDataUtil.createTestNote();
+
+        NoteEntity savedNote = noteRepository.save(note);
+
+        savedNote.setTitle("Updated Title");
+
+        noteRepository.save(savedNote);
+
+        Optional<NoteEntity> dbNote = noteRepository.findById((savedNote.getId()));
+
+        assertThat(dbNote).isPresent();
+        assertThat(dbNote.get()).isEqualTo(savedNote);
+    }
+
+    @Test
+    public void noteCreatedAndDeleted() {
+        NoteEntity note = TestDataUtil.createTestNote();
+        NoteEntity savedNote = noteRepository.save(note);
+
+        noteRepository.deleteById(savedNote.getId());
+
+        Optional<NoteEntity> dbNote = noteRepository.findById(savedNote.getId());
+
+        assertThat(dbNote).isEmpty();
+    }
 }

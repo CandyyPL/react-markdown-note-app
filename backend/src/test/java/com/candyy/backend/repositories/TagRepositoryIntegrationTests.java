@@ -12,6 +12,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
@@ -43,12 +47,48 @@ public class TagRepositoryIntegrationTests {
         assertThat(savedTag.getSlug()).isEqualTo(tag.getSlug());
     }
 
-//    @Test
-//    public void manyTagsCreatedAndRecalled() {}
+    @Test
+    public void manyTagsCreatedAndRecalled() {
+        List<TagEntity> tags = new ArrayList<>();
 
-//    @Test
-//    public void tagCreatedUpdatedAndRecalled() {}
+        for (var i = 0; i < 3; i++) {
+            TagEntity tag = TestDataUtil.createTestTag();
 
-//    @Test
-//    public void tagCreatedAndDeleted() {}
+            TagEntity savedTag = tagRepository.save(tag);
+
+            tags.add(tag);
+        }
+
+        List<TagEntity> dbTags = tagRepository.findAll();
+
+        assertThat(dbTags).hasSize(3);
+        assertThat(dbTags).containsExactlyElementsOf(tags);
+    }
+
+    @Test
+    public void tagCreatedUpdatedAndRecalled() {
+        TagEntity tag = TestDataUtil.createTestTag();
+        TagEntity savedTag = tagRepository.save(tag);
+
+        savedTag.setName("Updated Name");
+
+        tagRepository.save(savedTag);
+
+        Optional<TagEntity> dbTag = tagRepository.findById(savedTag.getId());
+
+        assertThat(dbTag).isPresent();
+        assertThat(dbTag.get()).isEqualTo(savedTag);
+    }
+
+    @Test
+    public void tagCreatedAndDeleted() {
+        TagEntity tag = TestDataUtil.createTestTag();
+        TagEntity savedTag = tagRepository.save(tag);
+
+        tagRepository.deleteById(savedTag.getId());
+
+        Optional<TagEntity> dbTag = tagRepository.findById(savedTag.getId());
+
+        assertThat(dbTag).isEmpty();
+    }
 }

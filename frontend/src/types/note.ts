@@ -10,5 +10,5 @@ export type NoteData = z.infer<typeof NoteDataSchema>;
 
 export type Note = {
   id: string;
-  createdAt: string;
+  createdAt: string | null;
 } & NoteData;

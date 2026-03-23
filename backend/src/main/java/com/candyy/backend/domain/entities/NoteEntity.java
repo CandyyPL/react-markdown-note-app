@@ -22,7 +22,7 @@ public class NoteEntity {
     @Column(name = "title", nullable = false)
     private String title;
 
-    @Column(name = "body", nullable = false)
+    @Column(name = "body", nullable = false, length = 20000)
     private String body;
 
     @ManyToMany

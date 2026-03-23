@@ -32,7 +32,7 @@ const NoteListItem = ({ note }: NoteListItemProps) => {
               {note.tagIds.length > 0 &&
                 note.tagIds.map((id) => (
                   <Badge key={id}>
-                    {tags.find((tag) => tag.id === id)?.label}
+                    {tags.find((tag) => tag.id === id)?.name}
                   </Badge>
                 ))}
             </ItemDescription>

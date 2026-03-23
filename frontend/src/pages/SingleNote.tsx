@@ -62,7 +62,7 @@ const SingleNote = () => {
           </div>
         </div>
         <p className='text-sm text-neutral-600'>
-          Created at {formatDatetime(note.createdAt)}
+          Created at {formatDatetime(note.createdAt!)}
         </p>
         <span className='flex gap-2'>
           {note.tagIds.length > 0 &&

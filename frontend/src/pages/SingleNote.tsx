@@ -9,15 +9,15 @@ import DeleteConfirmDialog from '@/components/DeleteConfirmDialog.tsx';
 
 const SingleNote = () => {
   const { id: noteId } = useParams();
-  const { notes, setNotes } = useNotes();
+  const { notes, deleteNote } = useNotes();
   const { tags } = useTags();
   const navigate = useNavigate();
 
   const [deleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
 
-  const handleDeleteNote = () => {
+  const handleDeleteNote = async () => {
     setDeleteConfirmOpen(false);
-    setNotes((prev) => prev.filter((note) => note.id !== noteId));
+    deleteNote(noteId!);
     navigate('/');
   };
 
@@ -30,7 +30,7 @@ const SingleNote = () => {
       <DeleteConfirmDialog
         open={deleteConfirmOpen}
         setOpen={setDeleteConfirmOpen}
-        confirmDelete={handleDeleteNote}
+        onConfirm={handleDeleteNote}
         dialogTitle='Confirm note deletion'
         dialogDescription='Make sure you want to delete this note.'
       />
@@ -40,7 +40,7 @@ const SingleNote = () => {
       <span className='flex gap-2'>
         {note.tagIds.length > 0 &&
           note.tagIds.map((id) => (
-            <Badge key={id}>{tags.find((tag) => tag.id === id)?.label}</Badge>
+            <Badge key={id}>{tags.find((tag) => tag.id === id)?.name}</Badge>
           ))}
       </span>
       <section className='prose mt-12'>

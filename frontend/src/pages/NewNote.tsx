@@ -7,7 +7,7 @@ import { useForm } from 'react-hook-form';
 import NoteForm from '@/components/NoteForm.tsx';
 
 const NewNote = () => {
-  const { onCreateNote } = useNotes();
+  const { createNote } = useNotes();
   const navigate = useNavigate();
 
   const form = useForm<z.infer<typeof NoteDataSchema>>({
@@ -21,7 +21,7 @@ const NewNote = () => {
 
   const onSubmit = (data: z.infer<typeof NoteDataSchema>) => {
     form.reset();
-    onCreateNote(data);
+    createNote(data);
     navigate('/');
   };
 

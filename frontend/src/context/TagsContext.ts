@@ -1,12 +1,12 @@
 import type { Tag, TagData } from '@/types/tag.ts';
-import type React from 'react';
-import { createContext, type SetStateAction } from 'react';
+import { createContext } from 'react';
 
 export type TagsContextType = {
   tags: Tag[];
-  setTags: React.Dispatch<SetStateAction<Tag[]>>;
-  onCreateTag: (data: TagData) => void;
-  isTagUsed: (tag: Tag) => boolean;
+  createTag: (data: TagData) => void;
+  isTagUsed: (id: string) => boolean;
+  isPending: boolean;
+  isError: boolean;
 };
 
 export const TagsContext = createContext<TagsContextType | null>(null);

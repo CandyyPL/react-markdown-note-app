@@ -1,10 +1,11 @@
 import type { Note, NoteData } from '@/types/note.ts';
-import React, { createContext, type SetStateAction } from 'react';
+import { createContext } from 'react';
 
 export type NotesContextType = {
   notes: Note[];
-  setNotes: React.Dispatch<SetStateAction<Note[]>>;
-  onCreateNote: (data: NoteData) => void;
+  createNote: (data: NoteData) => void;
+  isPending: boolean,
+  isError: boolean
 };
 
 export const NotesContext = createContext<NotesContextType | null>(null);

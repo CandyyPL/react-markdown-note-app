@@ -21,19 +21,19 @@ const NewTagDialog = ({
   dialogTitle,
   dialogDescription,
 }: TagDialogProps) => {
-  const { onCreateTag } = useTags();
+  const { createTag } = useTags();
 
   const form = useForm<z.infer<typeof TagSchema>>({
     resolver: zodResolver(TagSchema),
     defaultValues: {
-      label: '',
-      value: '',
+      name: '',
+      slug: '',
     },
   });
 
   const onSubmit = (data: z.infer<typeof TagSchema>) => {
     form.reset();
-    onCreateTag(data);
+    createTag(data);
   };
 
   return (

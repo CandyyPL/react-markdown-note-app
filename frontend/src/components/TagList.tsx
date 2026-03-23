@@ -4,13 +4,13 @@ import useTags from '@/hooks/useTags.ts';
 import type { Tag } from '@/types/tag.ts';
 import { useState } from 'react';
 
-export type SearchMethodType = 'label' | 'value';
+export type SearchMethodType = 'name' | 'slug';
 
 const TagList = () => {
   const { tags } = useTags();
 
   const [searchValue, setSearchValue] = useState<string>('');
-  const [searchMethod, setSearchMethod] = useState<SearchMethodType>('label');
+  const [searchMethod, setSearchMethod] = useState<SearchMethodType>('name');
 
   const onSearchValueChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
@@ -23,10 +23,10 @@ const TagList = () => {
   const filteredTags = tags.filter((tag) => {
     if (searchValue == '') return true;
 
-    if (searchMethod === 'label')
-      return tag.label.toLowerCase().includes(searchValue.toLowerCase());
-    if (searchMethod === 'value')
-      return tag.value.toLowerCase().includes(searchValue.toLowerCase());
+    if (searchMethod === 'name')
+      return tag.name.toLowerCase().includes(searchValue.toLowerCase());
+    if (searchMethod === 'slug')
+      return tag.slug.toLowerCase().includes(searchValue.toLowerCase());
   });
 
   return (

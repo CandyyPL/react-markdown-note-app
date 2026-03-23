@@ -42,7 +42,7 @@ const TagForm = ({
       <FieldSet>
         <FieldGroup>
           <Controller
-            name='label'
+            name='name'
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
@@ -60,7 +60,7 @@ const TagForm = ({
             )}
           />
           <Controller
-            name='value'
+            name='slug'
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>

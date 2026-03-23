@@ -22,27 +22,19 @@ const TagListItem = ({ tag }: TagListItemProps) => {
   const [isTagDeleteDialogOpen, setIsTagDeleteDialogOpen] = useState(false);
   const [isTagUsedDialogOpen, setIsTagUsedDialogOpen] = useState(false);
 
-  const { setTags, isTagUsed } = useTags();
+  const { updateTag, deleteTag, isTagUsed } = useTags();
 
   const handleEditTag = (data: TagData) => {
     setIsTagEditDialogOpen(false);
 
-    setTags((prev) =>
-      prev.map((t) => {
-        if (t.id === tag.id) {
-          return { id: t.id, ...data };
-        } else return t;
-      })
-    );
+    const tagWithId: Tag = { id: tag.id, ...data };
+
+    updateTag(tagWithId);
   };
 
   const handleDeleteTag = () => {
-    if (isTagUsed(tag)) setIsTagUsedDialogOpen(true);
+    if (isTagUsed(tag.id)) setIsTagUsedDialogOpen(true);
     else setIsTagDeleteDialogOpen(true);
-  };
-
-  const deleteTag = () => {
-    setTags((prev) => prev.filter((t) => t.id !== tag.id));
   };
 
   return (
@@ -58,7 +50,7 @@ const TagListItem = ({ tag }: TagListItemProps) => {
       <DeleteConfirmDialog
         open={isTagDeleteDialogOpen}
         setOpen={setIsTagDeleteDialogOpen}
-        confirmDelete={deleteTag}
+        onConfirm={() => deleteTag(tag.id)}
         dialogTitle='Confirm tag deletion'
         dialogDescription='Make sure you want to delete this tag.'
       />
@@ -72,10 +64,10 @@ const TagListItem = ({ tag }: TagListItemProps) => {
           className='h-25 transition-shadow hover:shadow-md'>
           <ItemContent>
             <ItemTitle className='line-clamp-1 text-2xl font-semibold'>
-              {tag.label}
+              {tag.name}
             </ItemTitle>
             <ItemDescription className='flex flex-wrap gap-1'>
-              {tag.value}
+              {tag.slug}
             </ItemDescription>
           </ItemContent>
           <ItemActions>

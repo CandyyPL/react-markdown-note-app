@@ -27,8 +27,8 @@ const EditTagDialog = ({
   const form = useForm<z.infer<typeof TagSchema>>({
     resolver: zodResolver(TagSchema),
     defaultValues: {
-      label: tag.label,
-      value: tag.value,
+      name: tag.name,
+      slug: tag.slug,
     },
   });
 

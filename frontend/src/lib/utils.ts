@@ -5,8 +5,4 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export const getCustomId = () => {
-  return window.crypto.randomUUID == null
-    ? Date.now().toString()
-    : crypto.randomUUID();
-};
+export const BACKEND_URL = 'http://localhost:8080';

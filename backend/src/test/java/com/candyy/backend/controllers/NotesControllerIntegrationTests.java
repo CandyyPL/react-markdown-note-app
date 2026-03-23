@@ -127,7 +127,7 @@ public class NotesControllerIntegrationTests {
     }
 
     @Test
-    public void recallNoteReturnsNote() throws Exception {
+    public void recallNoteReturnsCorrectNote() throws Exception {
         NoteEntity note = TestDataUtil.createTestNote();
         NoteEntity savedNote = notesService.create(note);
 

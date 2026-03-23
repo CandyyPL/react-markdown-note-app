@@ -38,7 +38,7 @@ public class NoteRepositoryIntegrationTests {
     }
 
     @Test
-    public void noteCreatedAndRecalled() {
+    public void noteWithoutTagCreatedAndRecalled() {
         NoteEntity note = TestDataUtil.createTestNote();
 
         NoteEntity savedNote = noteRepository.save(note);

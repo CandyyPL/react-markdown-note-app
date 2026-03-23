@@ -39,7 +39,7 @@ const MultiSelectField = ({
             <MultiSelectItem
               value={tag.id}
               className='cursor-pointer'>
-              {tag.label}
+              {tag.name}
             </MultiSelectItem>
           ))}
         </MultiSelectGroup>

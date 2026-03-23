@@ -147,6 +147,7 @@ public class NotesControllerIntegrationTests {
 
         NoteDTO updatedNote = new NoteDTO(
                 null,
+                null,
                 "New Title",
                 null,
                 Collections.emptySet()
@@ -174,6 +175,7 @@ public class NotesControllerIntegrationTests {
         Set<UUID> tagIds = new HashSet<>(Set.of(savedTag.getId()));
 
         NoteDTO updatedNote = new NoteDTO(
+                null,
                 null,
                 "New Title",
                 null,

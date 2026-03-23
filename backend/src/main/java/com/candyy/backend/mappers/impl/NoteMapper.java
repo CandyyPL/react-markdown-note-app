@@ -27,6 +27,7 @@ public class NoteMapper implements Mapper<NoteEntity, NoteDTO> {
 
         return new NoteDTO(
                 noteEntity.getId(),
+                noteEntity.getCreated().toString(),
                 noteEntity.getTitle(),
                 noteEntity.getBody(),
                 noteTagIds

@@ -13,7 +13,7 @@ import React, { type SetStateAction } from 'react';
 type DeleteConfirmDialogProps = {
   open: boolean;
   setOpen: React.Dispatch<SetStateAction<boolean>>;
-  confirmDelete: () => void;
+  onConfirm: () => void;
   dialogTitle: string;
   dialogDescription: string;
 };
@@ -21,7 +21,7 @@ type DeleteConfirmDialogProps = {
 const DeleteConfirmDialog = ({
   open,
   setOpen,
-  confirmDelete,
+  onConfirm,
   dialogTitle,
   dialogDescription,
 }: DeleteConfirmDialogProps) => {
@@ -40,7 +40,7 @@ const DeleteConfirmDialog = ({
               <Button
                 variant='destructive'
                 className='w-full cursor-pointer'
-                onClick={() => confirmDelete()}>
+                onClick={() => onConfirm()}>
                 Delete
               </Button>
             </DialogClose>

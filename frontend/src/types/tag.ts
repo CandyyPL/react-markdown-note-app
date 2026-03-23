@@ -1,8 +1,8 @@
 import { z } from 'zod';
 
 export const TagSchema = z.object({
-  label: z.string(),
-  value: z.string(),
+  name: z.string(),
+  slug: z.string(),
 });
 
 export type TagData = z.infer<typeof TagSchema>;

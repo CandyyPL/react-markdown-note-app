@@ -27,7 +27,7 @@ const EditNote = () => {
   const onSubmit = (data: z.infer<typeof NoteDataSchema>) => {
     form.reset();
 
-    const note: Note = { id: noteId!, ...data };
+    const note: Note = { id: noteId!, createdAt: null, ...data };
 
     updateNote(note);
     navigate('/');

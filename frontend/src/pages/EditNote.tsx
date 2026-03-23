@@ -1,14 +1,14 @@
 import { Navigate, useNavigate, useParams } from 'react-router-dom';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { NoteDataSchema } from '@/types/note.ts';
+import { type Note, NoteDataSchema } from '@/types/note.ts';
 import useNotes from '@/hooks/useNotes.ts';
 import { useForm } from 'react-hook-form';
 import NoteForm from '@/components/NoteForm.tsx';
 
 const EditNote = () => {
   const { id: noteId } = useParams();
-  const { notes, setNotes } = useNotes();
+  const { notes, updateNote } = useNotes();
   const navigate = useNavigate();
 
   const note = notes.find((note) => note.id === noteId);
@@ -26,13 +26,10 @@ const EditNote = () => {
 
   const onSubmit = (data: z.infer<typeof NoteDataSchema>) => {
     form.reset();
-    setNotes((prev) =>
-      prev.map((note) => {
-        if (note.id === noteId) {
-          return { id: noteId, ...data };
-        } else return note;
-      })
-    );
+
+    const note: Note = { id: noteId!, ...data };
+
+    updateNote(note);
     navigate('/');
   };
 

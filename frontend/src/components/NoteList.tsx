@@ -36,12 +36,18 @@ const NoteList = () => {
         onSelectedTagsChange={onSelectedTagsChange}
       />
       <ul className='my-4 flex flex-col gap-2'>
-        {filteredNotes.map((note: Note) => (
-          <NoteListItem
-            key={note.id}
-            note={note}
-          />
-        ))}
+        {filteredNotes.length > 0 ? (
+          filteredNotes.map((note: Note) => (
+            <NoteListItem
+              key={note.id}
+              note={note}
+            />
+          ))
+        ) : (
+          <p className='w-full text-center text-sm text-neutral-600'>
+            No notes found
+          </p>
+        )}
       </ul>
     </>
   );

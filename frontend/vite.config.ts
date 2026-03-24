@@ -14,5 +14,4 @@ export default defineConfig({
     tailwindCss(),
     tsconfigPaths(),
   ],
-  base: '/react-markdown-note-app/',
 });

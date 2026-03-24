@@ -68,9 +68,9 @@ public class TagsControllerIntegrationTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(tagJson)
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.name").value(tag.getName())
+                MockMvcResultMatchers.jsonPath("$.data.name").value(tag.getName())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.slug").value(tag.getSlug())
+                MockMvcResultMatchers.jsonPath("$.data.slug").value(tag.getSlug())
         );
     }
 
@@ -97,13 +97,13 @@ public class TagsControllerIntegrationTests {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/tags")
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$[0].id").value(tags.get(0).getId().toString())
+                MockMvcResultMatchers.jsonPath("$.data[0].id").value(tags.get(0).getId().toString())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$[0].id").value(tags.get(0).getId().toString())
+                MockMvcResultMatchers.jsonPath("$.data[0].id").value(tags.get(0).getId().toString())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$[2].name").value(tags.get(2).getName())
+                MockMvcResultMatchers.jsonPath("$.data[2].name").value(tags.get(2).getName())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$[2].name").value(tags.get(2).getName())
+                MockMvcResultMatchers.jsonPath("$.data[2].name").value(tags.get(2).getName())
         );
     }
 
@@ -127,9 +127,9 @@ public class TagsControllerIntegrationTests {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/tags/" + savedTag.getId().toString())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.id").value(savedTag.getId().toString())
+                MockMvcResultMatchers.jsonPath("$.data.id").value(savedTag.getId().toString())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.name").value(savedTag.getName())
+                MockMvcResultMatchers.jsonPath("$.data.name").value(savedTag.getName())
         );
     }
 
@@ -173,9 +173,9 @@ public class TagsControllerIntegrationTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(updatedTagJson)
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.id").value(savedTag.getId().toString())
+                MockMvcResultMatchers.jsonPath("$.data.id").value(savedTag.getId().toString())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.name").value(updatedTag.name())
+                MockMvcResultMatchers.jsonPath("$.data.name").value(updatedTag.name())
         );
     }
 

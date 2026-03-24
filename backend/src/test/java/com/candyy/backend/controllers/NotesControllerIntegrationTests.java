@@ -73,11 +73,11 @@ public class NotesControllerIntegrationTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(noteJson)
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.title").value(note.getTitle())
+                MockMvcResultMatchers.jsonPath("$.data.title").value(note.getTitle())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.body").value(note.getBody())
+                MockMvcResultMatchers.jsonPath("$.data.body").value(note.getBody())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.tagIds").isEmpty()
+                MockMvcResultMatchers.jsonPath("$.data.tagIds").isEmpty()
         );
     }
 
@@ -104,13 +104,13 @@ public class NotesControllerIntegrationTests {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/notes")
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$[0].id").value(notes.get(0).getId().toString())
+                MockMvcResultMatchers.jsonPath("$.data[0].id").value(notes.get(0).getId().toString())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$[2].id").value(notes.get(2).getId().toString())
+                MockMvcResultMatchers.jsonPath("$.data[2].id").value(notes.get(2).getId().toString())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$[0].title").value(notes.get(0).getTitle())
+                MockMvcResultMatchers.jsonPath("$.data[0].title").value(notes.get(0).getTitle())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$[2].title").value(notes.get(2).getTitle())
+                MockMvcResultMatchers.jsonPath("$.data[2].title").value(notes.get(2).getTitle())
         );
     }
 
@@ -134,9 +134,9 @@ public class NotesControllerIntegrationTests {
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/notes/" + savedNote.getId().toString())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.id").value(savedNote.getId().toString())
+                MockMvcResultMatchers.jsonPath("$.data.id").value(savedNote.getId().toString())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.title").value(savedNote.getTitle())
+                MockMvcResultMatchers.jsonPath("$.data.title").value(savedNote.getTitle())
         );
     }
 
@@ -189,17 +189,17 @@ public class NotesControllerIntegrationTests {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(updatedNoteJson)
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.id").value(savedNote.getId().toString())
+                MockMvcResultMatchers.jsonPath("$.data.id").value(savedNote.getId().toString())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.title").value(updatedNote.title())
+                MockMvcResultMatchers.jsonPath("$.data.title").value(updatedNote.title())
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.tagIds").isArray()
+                MockMvcResultMatchers.jsonPath("$.data.tagIds").isArray()
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.tagIds", Matchers.hasSize(1))
+                MockMvcResultMatchers.jsonPath("$.data.tagIds", Matchers.hasSize(1))
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.tagIds", Matchers.everyItem(Matchers.isA(String.class)))
+                MockMvcResultMatchers.jsonPath("$.data.tagIds", Matchers.everyItem(Matchers.isA(String.class)))
         ).andExpect(
-                MockMvcResultMatchers.jsonPath("$.tagIds", Matchers.contains(savedTag.getId().toString()))
+                MockMvcResultMatchers.jsonPath("$.data.tagIds", Matchers.contains(savedTag.getId().toString()))
         );
     }
 

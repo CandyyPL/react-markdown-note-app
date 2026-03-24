@@ -16,7 +16,6 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(path = "/notes")
-@CrossOrigin(origins = "http://localhost:5173")
 public class NotesController {
     private final NotesService notesService;
     private final NoteMapper noteMapper;

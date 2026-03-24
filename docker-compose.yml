@@ -8,6 +8,7 @@ services:
       POSTGRES_PASSWORD: bravetraveller
 
   backend:
+    image: "candyypl/react-md-note-backend:1.0"
     build: ./backend
     restart: always
     ports:
@@ -19,6 +20,7 @@ services:
       ALLOWED_ORIGIN: http://localhost:3000
 
   frontend:
+    image: "candyypl/react-md-note-frontend:1.0"
     build:
       context: ./frontend
       args:

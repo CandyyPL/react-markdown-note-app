@@ -1,55 +1,12 @@
-import { expect, type Locator, type Page, test } from '@playwright/test';
-
-const URL = 'http://localhost:5173';
-const CREATE_NEW_NOTE_URL = `${URL}/new`;
-
-type NoteData = {
-  title: string;
-  tags: string[];
-  body: string;
-};
-
-async function createNote(page: Page, noteData: NoteData) {
-  await page.goto(CREATE_NEW_NOTE_URL);
-
-  const noteTitleInput = page.getByPlaceholder('Note Title');
-  await noteTitleInput.fill(noteData.title);
-
-  const noteBodyInput = page.getByPlaceholder('Note Body');
-  await noteBodyInput.fill(noteData.body);
-
-  const createButton = page.getByRole('button', { name: 'Save' });
-  await createButton.click();
-}
-
-async function editNote(page: Page, note: Locator, newNoteData: NoteData) {
-  await expect(note).toBeVisible();
-  await note.click();
-
-  await page.getByRole('button', { name: 'Edit' }).click();
-  expect(page.url()).toMatch(/\/note\/[0-9a-z-]{36}\/edit$/i);
-
-  const noteTitleInput = page.getByPlaceholder('Note Title');
-  await noteTitleInput.fill(newNoteData.title);
-
-  const noteBodyInput = page.getByPlaceholder('Note Body');
-  await noteBodyInput.fill(newNoteData.body);
-
-  const createButton = page.getByRole('button', { name: 'Save' });
-  await createButton.click();
-}
-
-async function deleteNote(page: Page, note: Locator) {
-  await expect(note).toBeVisible();
-  await note.click();
-
-  await page.getByRole('button', { name: 'Delete' }).click();
-
-  const deleteDialog = page
-    .getByRole('dialog')
-    .filter({ hasText: 'Confirm note deletion' });
-  await deleteDialog.getByRole('button', { name: 'Delete' }).click();
-}
+import { expect, test } from '@playwright/test';
+import {
+  createNote,
+  createTag,
+  editNote,
+  deleteNote,
+  deleteTag,
+  URL,
+} from '@/tests/utils.ts';
 
 test('create & delete note without tags', async ({ page }) => {
   const note = {
@@ -106,4 +63,35 @@ test('create, edit & delete note without tags', async ({ page }) => {
 
   await expect(page).toHaveURL(URL);
   await expect(editedNote).not.toBeVisible();
+});
+
+test('create & delete note with tags', async ({ page }) => {
+  const tag = {
+    label: `Example Tag ${Date.now().toString().slice(8)}`,
+    id: 'tag-example',
+  };
+
+  await createTag(page, tag);
+
+  const createdTag = page.getByRole('listitem').filter({ hasText: tag.label });
+
+  const note = {
+    title: `Example Note ${Date.now().toString().slice(8)}`,
+    tags: [tag.label],
+    body: 'Example Body',
+  };
+
+  await createNote(page, note);
+
+  const createdNote = page
+    .getByRole('listitem')
+    .filter({ hasText: note.title });
+
+  await expect(createdNote).toBeVisible();
+
+  const noteTag = createdNote.getByText(tag.label);
+  await expect(noteTag).toBeVisible();
+
+  await deleteNote(page, createdNote);
+  await deleteTag(page, createdTag);
 });

@@ -27,7 +27,9 @@ const MultiSelectField = ({
     <MultiSelect
       onValuesChange={onChange}
       defaultValues={defaultValues ?? []}>
-      <MultiSelectTrigger className={cn('cursor-pointer', className)}>
+      <MultiSelectTrigger
+        className={cn('cursor-pointer', className)}
+        data-testid='multi-select'>
         <MultiSelectValue
           overflowBehavior='cutoff'
           placeholder='Select tags...'

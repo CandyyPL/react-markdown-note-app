@@ -24,7 +24,7 @@ export async function createNote(page: Page, noteData: NoteData) {
   const noteBodyInput = page.getByPlaceholder('Note Body');
   await noteBodyInput.fill(noteData.body);
 
-  const noteTagsSelect = page.getByText('Select tags...');
+  const noteTagsSelect = page.getByTestId('multi-select');
   await noteTagsSelect.click();
 
   for (const tag of noteData.tags) {
@@ -56,6 +56,16 @@ export async function editNote(
 
   const noteBodyInput = page.getByPlaceholder('Note Body');
   await noteBodyInput.fill(newNoteData.body);
+
+  const noteTagsSelect = page.getByTestId('multi-select');
+  await noteTagsSelect.click();
+
+  for (const tag of newNoteData.tags) {
+    const tagOption = page.getByRole('option').filter({ hasText: tag });
+    await tagOption.click();
+  }
+
+  await page.keyboard.press('Escape');
 
   const createButton = page.getByRole('button', { name: 'Save' });
   await createButton.click();
